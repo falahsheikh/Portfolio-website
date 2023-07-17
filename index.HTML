@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falah's Website</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/94166cfd27.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="header">
+    <div class="container">
+        <nav>
+            <img src="images/heading.jpg" class="logo">
+            <ul>
+                <li><a href="#header">Home</a></li>
+                <li><a href="#about">About Me</a></li>
+                <!-- <li><a href="#">My services</a></li> -->
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="header-text">
+            <p>Software Developer</p>
+            <h1>Hi! I'm <span>Falah</span></h1>
+        </div>
+    </div>
+</div>
+<!-- -------------------aboout me-------------------- -->
+<div id="about">
+    <div class="container">
+        <div class="row">
+            <div class="about-col-1">
+                <img src="images/abtUsr.png">
+            </div>
+            <div class="about-col-2">
+                <h1 class="sub-title">About Me</h1>
+                <p>I'm an innovative and driven individual with a diverse skill set that spans across different domains. From the realm of Software Development in Python and OpenCV to the cutting-edge field of Robotics Engineering, I've immersed myself in a world of limitless possibilities.
+
+                    However, what truly ignites my spirit and sets my soul ablaze is my recent voyage into the captivating world of frontend web development and design! This newfound passion has taken me by storm, infusing every fiber of my being with an insatiable thirst for creativity and technical brilliance.
+                    
+                    Join me as I explore the captivating world of frontend web development, combining my skills and passion to create remarkable web experiences.</p>
+                    <div class="tab-titles">
+                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                        <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                        <p class="tab-links" onclick="opentab('education')">Education</p>
+                    </div>
+                    <div class="tab-contents active-tab" id="skills">
+                        <ul>
+                            <li><span>Software Development</span><br>Machine learning</li>
+                            <li><span>Full-Stack Development</span><br>Developing Websites</li>
+
+                        </ul>
+                    </div>
+                    <div class="tab-contents" id="experience">
+                        <ul>
+                            <li><span>October 2022 - April 2023</span><br>Software Developer</li>
+                            <li><span>September 2022 - March 2023</span><br>Robotics Team Member</li>
+
+                        </ul>
+                    </div>
+                    <div class="tab-contents" id="education">
+                        <ul>
+                            <li><span>August 2022 - September 2026</span><br>University of Calgary, B.Sc. Computer Science</li>
+
+                        </ul>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- -------------------Projects-------------------- -->
+<!-- <div id="services">
+    <div class="container">
+        <h1 class="sub-title">My services</h1>
+        <div class="services-list">
+            <div>
+                <h2><b>Portfolio-Website</b></h2>
+                <p>Welcome to my personal website, where I share my journey as a computer science student, 
+                    showcasing projects, experience, and hobbies. Discover the source code for my portfolio website here, 
+                    and join me in exploring the fascinating world of computer science. 
+                    Let's embark on this informative and inspiring adventure together!</p>
+                <a href="#">GitHub Repository</a>
+            </div>
+            <div>
+                <h2><b>AcademicManagementSystem</b></h2>
+                <p>Python GUI code implementing a student record system with input fields, 
+                    data display, MVC design pattern, and a search feature.</p>
+                <a href="#">GitHub Repository</a>
+            </div>
+            <div>
+                <h2><b>ACRobotics_SumoBots</b></h2>
+                <p>Code and design files for an autonomous sumo bot, featuring independent functionality, 
+                    motor and sensor configurations, and a team collaboration at AC Robotics UCalgary.</p>
+                <a href="#">GitHub Repository</a>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!-- -------------------resume-------------------- -->
+<div id="projects">
+    <div class="container">
+        <h1 class="sub-title">Projects</h1>
+        <div class="work-list">
+            <div class="work">
+                <img src="images/work1,2,3.png">
+                <div class="layer">
+                    <h3>Portfolio-Website</h3>
+                    <p>Welcome to my personal website, where I share my journey as a computer science student, 
+                        showcasing projects, experience, and hobbies. Discover the source code for my portfolio website here, 
+                        and join me in exploring the fascinating world of computer science. 
+                        Let's embark on this informative and inspiring adventure together!</p>
+                    <a href="https://github.com/falahsheikh/AcademicManagementSystem">GitHub Repository</a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/work1,2,3.png">
+                <div class="layer">
+                    <h3>AcademicManagementSystem</h3>
+                    <p>Python GUI code implementing a student record system with input fields, 
+                        data display, MVC design pattern, and a search feature.</p>
+                    <a href="https://github.com/falahsheikh/AcademicManagementSystem">GitHub Repository</a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/work1,2,3.png">
+                <div class="layer">
+                    <h3>ACRobotics_SumoBots</h3>
+                    <p>Code and design files for an autonomous sumo bot, featuring independent functionality, 
+                        motor and sensor configurations, and a team collaboration at AC Robotics UCalgary.</p>
+                    <a href="https://github.com/falahsheikh/ACRobotics_SumoBots">GitHub Repository</a>
+                </div>
+            </div>
+        </div>
+        <a href="https://github.com/falahsheikh?tab=repositories" class="btn">See more</a>
+    </div>
+</div>
+<!-- -----------------contact------------------- -->
+<div id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title">Contact Me</h1>
+                <p><i class="fa-solid fa-square-envelope"></i> falah.h.sheikh@gmail.com</p>
+                <p><i class="fas fa-phone-square-alt"></i> +1 (587) 969 6241</p>
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/falah-sheikh-3289b018b/"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://github.com/falahsheikh"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.instagram.com/falah.sheikh/"><i class="fa-brands fa-instagram"></i></a>
+                    
+                </div>
+                <a href="images/Falah_s_Resume.pdf" download class="btn btn2">Download Resume</a>
+            </div>
+            <div class="contact-right">
+                <form name="submit-to-google-sheet">
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="text" name="E-mail" placeholder="Your E-mail" required>
+                    <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                    <button type="Submit" class="btn btn2">Submit</button>
+                </form>
+                <span id="msg"></span>
+            </div>
+
+        </div>
+    </div>
+    <div class="copyright">
+        <p>copyright © Falah</p>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    var tablinks = document.getElementsByClassName("tab-links")
+    var tabcontents = document.getElementsByClassName("tab-contents")
+    
+    function opentab(tabname){
+        for(tablink of tablinks){
+            tablink.classList.remove("active-link");
+        }
+        for(tabcontent of tabcontents){
+            tabcontent.classList.remove("active-tab");
+        }
+        event.currentTarget.classList.add("active-link");
+        document.getElementById(tabname).classList.add("active-tab")
+    }
+</script>
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyGRp4gqgWSOOlBxmUy6WFsO8lkJSy91wqvanPI_Uo2MPgMIjLLl81YEhsB29Oq-p38lg/exec'
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            msg.innerHTML = "Message Sent Successfully!"
+            setTimeout(function(){
+                msg.innerHTML = ""
+            },5000)
+            form.reset()
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+  
+</body>
+</html>
