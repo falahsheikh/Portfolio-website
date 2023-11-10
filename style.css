@@ -332,7 +332,7 @@ form .btn2{
 }
 
 /* -------------- css for small screens---------*/
-nav .fa{
+nav .fas{
     display: none;
 }
 
@@ -347,7 +347,7 @@ nav .fa{
                 font-size: 30px;
     }
 
-    nav .fa{
+    nav .fas{
         display: block;
         font-size: 25px;
     }
@@ -369,7 +369,7 @@ nav .fa{
         margin: 25px;
         
     }
-    nav ul .fa{
+    nav ul .fas{
         position: absolute;
         top: 25px;
         left: 25px;
