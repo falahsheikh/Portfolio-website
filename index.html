@@ -13,13 +13,15 @@
     <div class="container">
         <nav>
             <img src="images/heading.jpg" class="logo">
-            <ul>
+            <ul id="sidemenu">
                 <li><a href="#header">Home</a></li>
                 <li><a href="#about">About Me</a></li>
                 <!-- <li><a href="#">My services</a></li> -->
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <i class="fa-solid fa-x"onclick="closemenu()"></i>
             </ul>
+            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
         </nav>
         <div class="header-text">
             <p>Software Developer</p>
@@ -193,6 +195,36 @@ I'm excited about the limitless opportunities that lie ahead in the world of sof
         document.getElementById(tabname).classList.add("active-tab")
     }
 </script>
+
+
+
+
+
+    
+
+<script>
+    var sidemenu = document.getElementById("sidemenu");
+
+    function openmenu(){
+        sidemenu.style.right = "0";
+    }
+    function closemenu(){
+        sidemenu.style.right = "-200px";
+    }
+
+    
+
+
+    
+</script>
+
+
+
+
+
+    
+
+    
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyGRp4gqgWSOOlBxmUy6WFsO8lkJSy91wqvanPI_Uo2MPgMIjLLl81YEhsB29Oq-p38lg/exec'
     const form = document.forms['submit-to-google-sheet']
@@ -211,6 +243,7 @@ I'm excited about the limitless opportunities that lie ahead in the world of sof
         .catch(error => console.error('Error!', error.message))
     })
   </script>
+
   
 </body>
 </html>
