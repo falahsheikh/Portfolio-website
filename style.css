@@ -457,4 +457,7 @@ nav .fa-solid{
         text-align: center;
         padding: 15px;
     }
+    .header-text h1{
+        font-size: 45px;
+    }
 }
