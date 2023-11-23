@@ -451,6 +451,9 @@ nav .fa-solid{
         width: 370px;
         text-align: center;
         padding: 15px;
-
-    }  
+    } 
+    .img{
+        max-width: 100%;
+        height: auto;
+    } 
 }
