@@ -444,6 +444,7 @@ nav .fa-solid{
     }
     .btn{
         font-size: 11px;
+        white-space: nowrap;
     }
     .btn.btn2{
         font-size: 15px;
