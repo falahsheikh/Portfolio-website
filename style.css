@@ -8,16 +8,37 @@ html{
     scroll-behavior: smooth;
 }
 body{
-    background: #080808;
+    background: hsl(0, 0%, 0%);
     color: #fff;
 }
-#header{
+/* #header{
+    width: 100%;
+    height: 100vh;
+    background-image: url(images/portrait.png);
+    background-size: cover;
+    background-position: center;
+} */
+
+#header {
+    position: relative;
     width: 100%;
     height: 100vh;
     background-image: url(images/portrait.png);
     background-size: cover;
     background-position: center;
 }
+
+#header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 25%; /* Adjust the height of the gradient as needed */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+    pointer-events: none; /* Ensure the overlay doesn't interfere with content */
+}
+
 .container{
     padding: 10px 10%;
 }
@@ -31,7 +52,6 @@ nav{
 }
 .logo{
     width: 140px;
-
 }
 
 nav ul li{
@@ -331,6 +351,106 @@ form .btn2{
     display: block;
 }
 
-           
-}
 
+
+/*----------css for small screens-----------*/
+
+nav .fa-solid{
+    display: none;
+}
+@media only screen and (max-width: 600px){
+    #header{
+        background-image: url(./images/portrait.png);
+    }
+    .header-text{
+        margin-top: 100%;
+        font-size: 16px;
+    }
+    .header-text{
+        font-size: 30px;
+    }
+    nav .fa-solid{
+        display: block;
+        font-size: 25px;
+    }
+    nav ul{
+        background: #26d100;
+        position: fixed;
+        top: 0;
+        right: -200px;
+        width: 200px;
+        height: 100vh;
+        padding-top: 50px;
+        z-index: 2;
+    }
+    nav ul li{
+        display: block;
+        margin: 25px;
+    }
+    nav ul .fa-solid{
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        cursor: pointer;
+    }
+    .sub-title{
+        font-size: 40px;
+    }
+    .about-col-1, .about-col-2{
+        flex-basis: 100%;
+    }
+    .about-col-1{
+        margin-bottom: 30px;
+    }
+    .about-col-2{
+        font-size: 14px;
+    }
+    .tab-titles{
+        font-size: 16px;
+        margin-right: 20px;
+    }
+    .contact-left, .contact-right{
+        flex-basis: 100%;  
+    }
+    .btn{
+        display: block;
+        margin: 50px auto;
+        width: fit-content;
+        border: 1px solid #26d100;
+        padding: 14px 145px;
+        border-radius: 6px;
+        text-decoration: none;
+        color: #fff;
+        transition: background 0.5s;
+    }
+    #header {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        background-image: url(images/matrix.png);
+        background-size: cover;
+        background-position: center;
+    }
+    
+    #header::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 25%; /* Adjust the height of the gradient as needed */
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+        pointer-events: none; /* Ensure the overlay doesn't interfere with content */
+    }
+    .btn{
+        font-size: 11px;
+    }
+    .btn.btn2{
+        font-size: 15px;
+        white-space: nowrap;
+        width: 370px;
+        text-align: center;
+        padding: 15px;
+
+    }  
+}

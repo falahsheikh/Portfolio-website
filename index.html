@@ -12,14 +12,16 @@
 <div id="header">
     <div class="container">
         <nav>
-            <img src="images/heading.jpg" class="logo">
+            <img src="./images/heading.png" class="logo">
             <ul id="sidemenu">
                 <li><a href="#header">Home</a></li>
                 <li><a href="#about">About Me</a></li>
                 <!-- <li><a href="#">My services</a></li> -->
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <i class="fa-solid fa-x" onclick="closemenu()"></i>
             </ul>
+            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
         </nav>
         <div class="header-text">
             <p>Software Developer</p>
@@ -32,17 +34,17 @@
     <div class="container">
         <div class="row">
             <div class="about-col-1">
-                <img src="images/about_me_pic.png">
+                <img src="./images/IMG_3727.JPG">
             </div>
             <div class="about-col-2">
                 <h1 class="sub-title">About Me</h1>
-                <p>Hey there! I'm Falah, a passionate software developer who is eager to learn all aspects of development. I have a deep curiosity and enthusiasm for exploring various domains in the software development world. From frontend to backend, I'm excited about the endless possibilities and challenges that come with it.
+                <p>Hey there! my name is Falah, I'm passionate software developer who is eager to learn all aspects of development. I have a deep curiosity and enthusiasm for exploring various domains in the software development world. From frontend to backend, I'm excited about the endless possibilities and challenges that come with it.
 
-My journey in software development is driven by a thirst for knowledge and a desire to continuously grow. I approach each project with an open mind, ready to embrace new technologies, tools, and languages. The process of learning and expanding my skill set brings me immense joy and fulfillment.</p>
-                <p></p>
+                My journey in software development is driven by a thirst for knowledge and a desire to continuously grow. I approach each project with an open mind, ready to embrace new technologies, tools, and languages. The process of learning and expanding my skill set brings me immense joy and fulfillment.</p>
+                <br>
                 <p>The ever-evolving nature of the software development landscape keeps me on my toes. I'm dedicated to staying up-to-date with the latest industry trends, best practices, and emerging technologies. This commitment ensures that I can tackle challenges with a fresh perspective and deliver optimal results.
 
-I'm excited about the limitless opportunities that lie ahead in the world of software development. With a hunger for knowledge and a passion for continuous growth, I'm ready to embrace new projects, learn from every experience, and contribute to the ever-evolving field of development.</p>
+                I'm excited about the limitless opportunities that lie ahead in the world of software development. With a hunger for knowledge and a passion for continuous growth, I'm ready to embrace new projects, learn from every experience, and contribute to the ever-evolving field of development.</p>
                     <div class="tab-titles">
                         <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
                         <p class="tab-links" onclick="opentab('experience')">Experience</p>
@@ -57,6 +59,7 @@ I'm excited about the limitless opportunities that lie ahead in the world of sof
                     </div>
                     <div class="tab-contents" id="experience">
                         <ul>
+                            <li><span>September 2023 - Present</span><br>Embedded Systems Engineer</li>
                             <li><span>October 2022 - April 2023</span><br>Software Developer</li>
                             <li><span>September 2022 - March 2023</span><br>Robotics Team Member</li>
 
@@ -170,7 +173,7 @@ I'm excited about the limitless opportunities that lie ahead in the world of sof
         </div>
     </div>
     <div class="copyright">
-        <p>copyright © Falah</p>
+        <p>Falah Sheikh © 2023</p>
     </div>
 </div>
 
@@ -192,6 +195,19 @@ I'm excited about the limitless opportunities that lie ahead in the world of sof
         event.currentTarget.classList.add("active-link");
         document.getElementById(tabname).classList.add("active-tab")
     }
+</script>
+
+<script>
+
+    var sidemenu = document.getElementById("sidemenu");
+
+    function openmenu(){
+        sidemenu.style.right = "0";
+    }
+    function closemenu(){
+        sidemenu.style.right = "-200px";
+    }
+
 </script>
 
 
