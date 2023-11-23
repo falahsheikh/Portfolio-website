@@ -423,14 +423,6 @@ nav .fa-solid{
         color: #fff;
         transition: background 0.5s;
     }
-    /* #header {
-        position: relative;
-        width: 100%;
-        height: 100vh;
-        background-image: url(images/matrix.png);
-        background-size: cover;
-        background-position: center;
-    } */
     #header {
         position: relative;
         width: 100%;
@@ -438,13 +430,7 @@ nav .fa-solid{
         background-image: url(images/matrix.png);
         background-size: cover;
         background-position: center;
-        background-repeat: no-repeat; /* Prevent image from repeating */
-        overflow: hidden; /* Ensure the entire image is visible */
     }
-    @media (max-width: 768px) {
-        #header {
-            background-size: contain; /* Adjust background size for smaller screens */
-        }
     
     #header::after {
         content: "";
