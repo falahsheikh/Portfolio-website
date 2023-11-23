@@ -471,4 +471,9 @@ nav .fa-solid{
     .header-text h1{
         font-size: 45px;
     }
+    .layer {
+        height: 100%; /* Set height to auto */
+        overflow: visible; /* Adjust overflow property */
+        transition: none; /* Disable transition on click for smaller screens */
+    }
 }
