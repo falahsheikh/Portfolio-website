@@ -427,7 +427,7 @@ nav .fa-solid{
         position: relative;
         width: 100%;
         height: 100vh;
-        background-image: url(images/mat.png);
+        background-image: url(./images/matrix-removebg-preview.png);
         background-size: cover;
         background-position: center;
     }
