@@ -51,7 +51,10 @@ nav{
 
 }
 .logo{
-    width: 140px;
+    font-size: 45px;
+    font-family: serif;
+    margin-left: 20px;
+    margin-top: 5px;
 }
 
 nav ul li{
@@ -82,7 +85,7 @@ nav ul li a:hover::after{
 
 }
 .header-text{
-    margin-top: 20%;
+    margin-top: 30%;
     font-size: 30px;
 
 }
@@ -94,6 +97,35 @@ nav ul li a:hover::after{
 .header-text h1 span{
     color:#26d100;
 }
+
+
+
+
+body {
+    min-height: 100vh;
+    margin: 0;
+}
+
+nav.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(38, 38, 38, 0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0);
+    border-radius: var(--navbar-border-radius);
+    backdrop-filter: blur(10px);
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+
 /* ---------------about me------------- */
 #about{
     padding: 80px 0;
@@ -397,6 +429,9 @@ nav .fa-solid{
         left: 25px;
         cursor: pointer;
     }
+    nav .fa-solid.fa-bars{
+        margin-right: 20px;
+    }
     .sub-title{
         font-size: 40px;
     }
@@ -475,5 +510,8 @@ nav .fa-solid{
         height: 100%; /* Set height to auto */
         overflow: visible; /* Adjust overflow property */
         transition: none; /* Disable transition on click for smaller screens */
+    }
+    .copyright{
+        background-color: #000000;
     }
 }
