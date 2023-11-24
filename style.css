@@ -57,6 +57,7 @@ nav{
     margin-top: 5px;
 }
 
+
 nav ul li{
     display: inline-block;
     list-style: none;
@@ -516,25 +517,21 @@ nav .fa-solid{
     .copyright{
         background-color: #000000;
     }
-
-
-
-
     body {
         min-height: 100vh;
         margin: 0;
     }
     
+
     nav.navbar {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         z-index: 1000;
-        background-color: rgba(38, 38, 38, 0);
+        background-color: #1e1f1d; /* Replace with your desired grey color */
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0);
         border-radius: var(--navbar-border-radius);
-        backdrop-filter: blur(10px);
     }
     
     .navbar {
@@ -543,4 +540,5 @@ nav .fa-solid{
         justify-content: space-between;
         flex-wrap: wrap;
     }
+    
 }
