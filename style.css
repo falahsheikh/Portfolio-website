@@ -516,4 +516,31 @@ nav .fa-solid{
     .copyright{
         background-color: #000000;
     }
+
+
+
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+    }
+    
+    nav.navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        background-color: rgba(38, 38, 38, 0);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0);
+        border-radius: var(--navbar-border-radius);
+        backdrop-filter: blur(10px);
+    }
+    
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
 }
