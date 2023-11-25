@@ -700,7 +700,7 @@ nav .fa-solid{
     
     .services-list {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(30px, 1fr)); /* Adjust the minmax value for box size */
+        grid-template-columns: repeat(auto-fit, minmax(50px, 1fr)); /* Adjust the minmax value for box size */
         grid-gap: 20px; /* Adjust the gap between boxes */
         margin-top: 60px;
     }
