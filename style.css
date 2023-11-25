@@ -176,6 +176,18 @@ nav.navbar {
     display: flex;
     margin: 20px 0 40px;
 }
+.tab-contents ul li .job-title {
+    font-size: 11px;
+    color: #08e069;
+}
+.tab-contents ul li .uni-where{
+    font-size: 11px;
+    color: #08e069;
+}
+.tab-contents ul li .degree-title{
+    font-size: medium;
+    color: #ababab;
+}
 .tab-links{
     margin-right: 50px;
     font-size: 18px;
@@ -207,6 +219,7 @@ nav.navbar {
     color: #26d100a8;
     font-size: 14px;
 }
+
 .tab-contents{
     display: none;
 }
