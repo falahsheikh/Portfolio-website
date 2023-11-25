@@ -689,5 +689,55 @@ nav .fa-solid{
         justify-content: space-between;
         flex-wrap: wrap;
     }
+
+
+
+    /* ---------skills-------- */
+
+    #services {
+        padding: 30px 0;
+    }
+    
+    .services-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(83px, 1fr)); /* Adjust the minmax value for box size */
+        grid-gap: 20px; /* Adjust the gap between boxes */
+        margin-top: 60px;
+    }
+    
+    .services-list div {
+        background: #262626;
+        padding: 20px; /* Adjust the padding inside each box */
+        border-radius: 10px;
+        transition: background 0.5s, transform 0.5s;
+        text-align: center; /* Center the content */
+    }
+    
+    .services-list div img {
+        width: 100%; /* Adjust the width of the image */
+        height: auto; /* Adjust the height of the image */
+        border-radius: 50; /* Make the image a circle, adjust as needed */
+        display: block;
+        margin: 0 auto; /* Center the image within the container */
+    }
+    
+    .services-list div h2 {
+        font-size: 16px; /* Adjust the font size of the heading */
+        font-weight: 500;
+        margin-bottom: 10px; /* Adjust the margin below the heading */
+    }
+    
+    .services-list div a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 12px; /* Adjust the font size of the link */
+        margin-top: 10px; /* Adjust the margin above the link */
+        display: inline-block;
+    }
+    
+    .services-list div:hover {
+        background: #2a3e2d62;
+        transform: translateY(-5px); /* Adjust the hover effect */
+    }
     
 }
