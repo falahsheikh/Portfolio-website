@@ -252,56 +252,55 @@ nav.navbar {
 
 
 
+
+
+
 #services {
     padding: 30px 0;
 }
 
 .services-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust the minmax value for box size */
-    grid-gap: 20px; /* Adjust the gap between boxes */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Added 'px' unit */
+    grid-gap: 40px;
     margin-top: 60px;
 }
 
 .services-list div {
     background: #262626;
-    padding: 20px; /* Adjust the padding inside each box */
+    padding: 40px;
+    font-size: 13px;
+    font-weight: 300;
     border-radius: 10px;
     transition: background 0.5s, transform 0.5s;
-    text-align: center; /* Center the content */
-}
-
-.services-list div img {
-    width: 100%; /* Adjust the width of the image */
-    height: auto; /* Adjust the height of the image */
-    border-radius: 50; /* Make the image a circle, adjust as needed */
-    display: block;
-    margin: 0 auto; /* Center the image within the container */
+    height: 150px; /* Set height equal to width */
+    min-height: 250px; /* Set a minimum height */
+    width: 250px; /* Set width equal to height */
+    min-width: 250px; /* Set a minimum width */
 }
 
 .services-list div h2 {
-    font-size: 16px; /* Adjust the font size of the heading */
+    font-size: 19px;
     font-weight: 500;
-    margin-bottom: 10px; /* Adjust the margin below the heading */
+    margin-bottom: 15px;
+    text-align: center;
 }
 
 .services-list div a {
     text-decoration: none;
     color: #fff;
-    font-size: 12px; /* Adjust the font size of the link */
-    margin-top: 10px; /* Adjust the margin above the link */
+    font-size: 12px;
+    margin-top: 20px;
     display: inline-block;
 }
 
 .services-list div:hover {
-    background: #2a3e2d62;
-    transform: translateY(-5px); /* Adjust the hover effect */
+    background: #ff004f;
+    transform: translateY(-10px);
 }
 
-
-
 /* -----------------projects----------------- */
-/* #projects{
+#projects{
     padding: 50px 0;
 
 }
@@ -377,90 +376,7 @@ nav.navbar {
 }
 .btn:hover{
     background: #26d100;
-} */
-
-
-
-
-
-#projects {
-    padding: 50px 0;
 }
-
-.work-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-gap: 40px;
-    margin-top: 50px;
-}
-
-.work {
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-}
-
-.work img {
-    width: 100%;
-    border-radius: 10px;
-    display: block;
-}
-
-.layer {
-    width: 100%;
-    height: 100%; /* Set initial height to 100% */
-    background: linear-gradient(rgba(0, 0, 0, 0.6), #00ff95);
-    border-radius: 10px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0 40px;
-    text-align: center;
-    font-size: 14px;
-}
-
-.layer h3 {
-    font-weight: 500;
-    margin-bottom: 20px;
-}
-
-.layer a {
-    margin-top: 20px;
-    color: #26d100;
-    text-decoration: none;
-    font-size: 13px;
-    line-height: 60px;
-    background: #fff;
-    width: 120px;
-    height: 60px;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.work img:hover {
-    transform: scale(1.1);
-}
-
-.btn {
-    display: block;
-    margin: 50px auto;
-    width: fit-content;
-    border: 1px solid #26d100;
-    padding: 14px 50px;
-    border-radius: 6px;
-    text-decoration: none;
-    color: #fff;
-}
-
-.btn:hover {
-    background: #26d100;
-}
-
 /* -----------------contact--------------- */
 
 .contact-left{
