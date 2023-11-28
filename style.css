@@ -396,6 +396,88 @@ nav.navbar {
 
 
 
+/* #projects {
+    padding: 50px 0;
+}
+
+.work-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 40px;
+    margin-top: 50px;
+}
+
+.work {
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.work img {
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+}
+
+.layer {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), #00ff95);
+    border-radius: 10px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.layer h3 {
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.layer a {
+    margin-top: 20px;
+    color: #26d100;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 60px;
+    background: #fff;
+    width: 120px;
+    height: 60px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.work img:hover {
+    transform: scale(1.1);
+}
+
+.btn {
+    display: block;
+    margin: 50px auto;
+    width: fit-content;
+    border: 1px solid #26d100;
+    padding: 14px 50px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.btn:hover {
+    background: #26d100;
+} */
+
+
+
+
+
 #projects {
     padding: 50px 0;
 }
@@ -415,6 +497,8 @@ nav.navbar {
 
 .work img {
     width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensure image does not exceed container width */
     border-radius: 10px;
     display: block;
 }
@@ -473,6 +557,7 @@ nav.navbar {
 .btn:hover {
     background: #26d100;
 }
+
 
 /* -----------------contact--------------- */
 
