@@ -837,8 +837,10 @@ nav .fa-solid{
         background: #2a3e2d62;
         transform: translateY(-5px); 
     } */
+
+   
     #services {
-        padding: 10px 0; /* Adjust the padding as needed */
+        padding: 10px 0; 
     }
     
     .services-list {
@@ -850,12 +852,12 @@ nav .fa-solid{
     .services-list div {
         flex: 0 0 auto;
         background: #262626;
-        padding: 10px; /* Adjust the padding as needed */
+        padding: 10px; 
         border-radius: 10px;
         transition: background 0.5s, transform 0.5s;
         text-align: center;
-        margin-right: 10px; /* Adjust the margin as needed */
-        width: 150px; /* Adjust the width as needed */
+        margin-right: 10px; 
+        width: 150px;
     }
     
     .services-list div img {
@@ -867,17 +869,16 @@ nav .fa-solid{
     }
     
     .services-list div h2 {
-        font-size: 14px; /* Adjust the font size as needed */
+        font-size: 14px; 
         font-weight: 500;
-        margin-bottom: 5px; /* Adjust the margin as needed */
+        margin-bottom: 5px; 
     }
     
     .services-list div a {
         text-decoration: none;
         color: #fff;
-        font-size: 10px; /* Adjust the font size as needed */
-        margin-top: 5px; /* Adjust the margin as needed */
-    }
+        font-size: 10px; 
+        margin-top: 5px; 
     
     .services-list div:last-child {
         margin-right: 0;
@@ -887,6 +888,9 @@ nav .fa-solid{
         background: #2a3e2d62;
         transform: translateY(-5px);
     }
+    
+
+
     
     
             
