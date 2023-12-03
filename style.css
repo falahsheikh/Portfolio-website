@@ -746,13 +746,14 @@ nav .fa-solid{
         font-size: 11px;
         white-space: nowrap;
     }
-    .btn.btn2{
+.btn.btn2{
         font-size: 15px;
         white-space: nowrap;
         width: 370px;
         text-align: center;
         padding: 15px;
     }
+    
     .header-text h1{
         font-size: 45px;
     }
