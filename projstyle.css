@@ -92,11 +92,11 @@ nav.navbar {
     left: 0;
     width: 100%;
     z-index: 1000;
-    background-color: rgba(38, 38, 38, 0.003)
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0);
+    background-color: rgba(38, 38, 38, 0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.428);
     border-radius: var(--navbar-border-radius);
     backdrop-filter: blur(10px);
-}  
+}
 
 
 
@@ -356,7 +356,7 @@ nav.navbar {
 
 /* -----------------contact--------------- */
 
-.contact-left{
+/* .contact-left{
     flex-basis: 35%;
 
 }
@@ -427,7 +427,7 @@ form .btn2{
     margin-top: -40;
     display: block;
 }
-
+ */
 
 
 /*----------css for small screens-----------*/
@@ -666,13 +666,3 @@ nav .fa-solid{
         background: #2a3e2d62;
         transform: translateY(-5px);
     } */
-    
-
-
-    
-    
-            
-    
-    
-    
-}
