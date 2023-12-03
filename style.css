@@ -310,6 +310,39 @@ nav.navbar {
     background: #2a3e2d62;
     transform: translateY(-5px); /* Adjust the hover effect */
 }
+/* .btn.btn23 {
+    font-size: 15px; 
+    white-space: nowrap;
+    width: 200px; 
+    text-align: center;
+    padding: 10px; 
+    display: inline-block;
+    background: #28dc008b;
+    position: relative;
+    z-index: 2; 
+    font-style: italic;
+    margin-top: 5%;
+} */
+
+.btn.btn23 {
+    font-size: 15px; /* Adjust the font size as needed */
+    white-space: nowrap;
+    width: 200px; /* Adjust the width as needed */
+    text-align: center;
+    padding: 10px; /* Adjust the padding as needed */
+    display: inline-block;
+    background: #2fff008b;
+    position: relative;
+    z-index: 2; /* Adjust the z-index value as needed */
+    font-style: italic;
+    margin-top: 5%;
+    transition: background-color 0.3s ease; /* Add a smooth transition for background color change */
+}
+
+.btn.btn23:hover {
+    background: #04db0b; /* Change the background color on hover */
+}
+
 
 
 
@@ -593,10 +626,25 @@ nav.navbar {
     color: #26d100;
     transform: translateY(-5px);
 }
-.btn.btn2{
+/* .btn.btn2{
     display: inline-block;
     background: #26d100;
+    
+} */
+.btn.btn2 {
+    display: block;
+    margin: 50px auto;
+    width: fit-content;
+    background-color: #26d100;
+    /* border: 1px solid #000000; */
+    padding: 14px 130px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: background 0.5s;
+    margin-left: 0%;
 }
+
 .contact-right form{
     width: 100%;
 
@@ -647,6 +695,7 @@ nav .fa-solid{
     .header-text{
         margin-top: 100%;
         font-size: 16px;
+        z-index: 10000;
     }
     .header-text{
         font-size: 30px;
@@ -663,7 +712,7 @@ nav .fa-solid{
         width: 200px;
         height: 100vh;
         padding-top: 50px;
-        z-index: 2;
+        z-index: 9999;
         transition: right 0.5s ease;
     }
     nav:hover ul{
@@ -743,16 +792,45 @@ nav .fa-solid{
         color: #fff;
     }
     .btn{
-        font-size: 11px;
+        font-size: 15px;
         white-space: nowrap;
+ 
     }
-.btn.btn2{
+/* .btn.btn2{
         font-size: 15px;
         white-space: nowrap;
         width: 370px;
         text-align: center;
-        padding: 15px;
-    }
+        padding: 15px; 
+        display: inline-block;
+        background: #32ff05;
+    
+    } */
+/* .btn.btn2 {
+    font-size: 15px;
+    white-space: nowrap;
+    width: 200px; 
+    text-align: center;
+    padding: 10px; 
+    display: inline-block;
+    background: #32ff05;  
+    z-index: 1;  
+}  */
+.btn.btn23 {
+    font-size: 15px; /* Adjust the font size as needed */
+    white-space: nowrap;
+    width: 200px; /* Adjust the width as needed */
+    text-align: center;
+    padding: 10px; /* Adjust the padding as needed */
+    display: inline-block;
+    background: #28dc008b;
+    position: relative;
+    z-index: 2; /* Adjust the z-index value as needed */
+    font-style: italic;
+    margin-top: 5%;
+}
+
+    
     
     .header-text h1{
         font-size: 45px;
