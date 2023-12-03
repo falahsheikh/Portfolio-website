@@ -715,7 +715,7 @@ nav .fa-solid{
         width: 200px;
         height: 100vh;
         padding-top: 50px;
-        z-index: 9999;
+        /* z-index: 9999; */
         transition: right 0.5s ease;
     }
     nav:hover ul{
@@ -797,9 +797,11 @@ nav .fa-solid{
     .btn{
         font-size: 15px;
         white-space: nowrap;
+        text-align: center;
+        width:auto;
  
     }
-.btn.btn2{
+/* .btn.btn2{
         font-size: 15px;
         white-space: nowrap;
         width: 100%;
@@ -807,9 +809,24 @@ nav .fa-solid{
         font-style: italic;
         padding: 15px; 
         display: inline-block;
-        background: #32ff05;
+        background: #33ff055c;
         z-index: 1;
-    } 
+}  */
+.btn.btn2 {
+    font-size: 15px;
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    padding: 15px;
+    display: inline-block;
+    background: #33ff055c;
+    z-index: 2;  /* Set a higher z-index than the gradient overlay */
+    position:relative;
+}
+
+
+
 /* .btn.btn2 {
     font-size: 15px;
     white-space: nowrap;
