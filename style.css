@@ -323,25 +323,25 @@ nav.navbar {
     font-style: italic;
     margin-top: 5%;
 } */
-
+/* 
 .btn.btn23 {
-    font-size: 15px; /* Adjust the font size as needed */
+    font-size: 15px; 
     white-space: nowrap;
-    width: 200px; /* Adjust the width as needed */
+    width: 200px; 
     text-align: center;
-    padding: 10px; /* Adjust the padding as needed */
+    padding: 10px; 
     display: inline-block;
     background: #2fff008b;
     position: relative;
-    z-index: 2; /* Adjust the z-index value as needed */
+    z-index: 2; 
     font-style: italic;
     margin-top: 5%;
-    transition: background-color 0.3s ease; /* Add a smooth transition for background color change */
+    transition: background-color 0.3s ease; 
 }
 
 .btn.btn23:hover {
-    background: #04db0b; /* Change the background color on hover */
-}
+    background: #04db0b; 
+} */
 
 
 
@@ -635,7 +635,7 @@ nav.navbar {
     display: block;
     margin: 50px auto;
     width: fit-content;
-    background-color: #26d100;
+    background-color: #26d10080;
     /* border: 1px solid #000000; */
     padding: 14px 130px;
     border-radius: 6px;
@@ -644,6 +644,9 @@ nav.navbar {
     transition: background 0.5s;
     margin-left: 0%;
 }
+.btn.btn2:hover {
+    background: #04db0b; 
+} 
 
 .contact-right form{
     width: 100%;
@@ -816,19 +819,19 @@ nav .fa-solid{
     background: #32ff05;  
     z-index: 1;  
 }  */
-.btn.btn23 {
-    font-size: 15px; /* Adjust the font size as needed */
+/* .btn.btn23 {
+    font-size: 15px; 
     white-space: nowrap;
-    width: 200px; /* Adjust the width as needed */
+    width: 200px; 
     text-align: center;
-    padding: 10px; /* Adjust the padding as needed */
+    padding: 10px;
     display: inline-block;
     background: #28dc008b;
     position: relative;
-    z-index: 2; /* Adjust the z-index value as needed */
+    z-index: 2; 
     font-style: italic;
     margin-top: 5%;
-}
+} */
 
     
     
