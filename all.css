@@ -146,7 +146,7 @@ nav.navbar {
 
 
 /* ---------------about me------------- */
-#about{
+/* #about{
     padding: 80px 0;
     color: #ababab
 }
@@ -226,7 +226,7 @@ nav.navbar {
 }
 .tab-contents.active-tab{
     display: block;
-}
+} */
 
 /* --------------------SKILLS---------------------- */
 /* #services{
@@ -266,51 +266,52 @@ nav.navbar {
 
 
 
-#services {
+/* #services {
     padding: 30px 0;
 }
 
 .services-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust the minmax value for box size */
-    grid-gap: 20px; /* Adjust the gap between boxes */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+    grid-gap: 20px; 
     margin-top: 60px;
 }
 
 .services-list div {
     background: #262626;
-    padding: 20px; /* Adjust the padding inside each box */
+    padding: 20px; 
     border-radius: 10px;
     transition: background 0.5s, transform 0.5s;
-    text-align: center; /* Center the content */
+    text-align: center; 
 }
 
 .services-list div img {
-    width: 100%; /* Adjust the width of the image */
-    height: auto; /* Adjust the height of the image */
-    border-radius: 50; /* Make the image a circle, adjust as needed */
+    width: 100%; 
+    height: auto; 
+    border-radius: 50; 
     display: block;
-    margin: 0 auto; /* Center the image within the container */
+    margin: 0 auto; 
 }
 
 .services-list div h2 {
-    font-size: 16px; /* Adjust the font size of the heading */
+    font-size: 16px; 
     font-weight: 500;
-    margin-bottom: 10px; /* Adjust the margin below the heading */
+    margin-bottom: 10px; 
 }
 
 .services-list div a {
     text-decoration: none;
     color: #fff;
-    font-size: 12px; /* Adjust the font size of the link */
-    margin-top: 10px; /* Adjust the margin above the link */
+    font-size: 12px; 
+    margin-top: 10px; 
     display: inline-block;
 }
 
 .services-list div:hover {
     background: #2a3e2d62;
-    transform: translateY(-5px); /* Adjust the hover effect */
+    transform: translateY(-5px); 
 }
+ */
 
 
 
@@ -562,7 +563,7 @@ nav.navbar {
 
 /* -----------------contact--------------- */
 
-.contact-left{
+/* .contact-left{
     flex-basis: 35%;
 
 }
@@ -618,7 +619,7 @@ form .btn2{
     font-size: 18px;
     margin-top: 20px;
     cursor: pointer;
-}
+}*/
 .copyright{
     width: 100%;
     text-align: center;
@@ -642,16 +643,16 @@ nav .fa-solid{
     display: none;
 }
 @media only screen and (max-width: 600px){
-    #header{
+    /* #header{
         background-image: url(./images/portrait.png);
-    }
-    .header-text{
+    } */
+    /* .header-text{
         margin-top: 100%;
         font-size: 16px;
     }
     .header-text{
         font-size: 30px;
-    }
+    } */
     nav .fa-solid{
         display: block;
         font-size: 25px;
@@ -699,9 +700,9 @@ nav .fa-solid{
         font-size: 16px;
         margin-right: 20px;
     }
-    .contact-left, .contact-right{
+    /* .contact-left, .contact-right{
         flex-basis: 100%;  
-    }
+    } */
     .btn{
         display: block;
         margin: 50px auto;
@@ -713,7 +714,7 @@ nav .fa-solid{
         color: #fff;
         transition: background 0.5s;
     }
-    #header {
+    /* #header {
         position: relative;
         width: 100%;
         height: 100vh;
@@ -721,18 +722,18 @@ nav .fa-solid{
         background-size: cover;
         background-position: center;
         overflow: hidden;
-    }
-
+    } */
+/* 
     #header::after {
         content: "";
         position: absolute;
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 110%; /* Adjust the height of the gradient as needed */
+        height: 110%; 
         background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(0, 0, 0));
-        pointer-events: none; /* Ensure the overlay doesn't interfere with content */
-    }
+        pointer-events: none; 
+    } */
     #header p {
         position: relative;
         z-index: 1;
@@ -840,7 +841,7 @@ nav .fa-solid{
     } */
 
    
-    #services {
+    /* #services {
         padding: 10px 0; 
     }
     
@@ -888,6 +889,6 @@ nav .fa-solid{
     .services-list div:hover {
         background: #2a3e2d62;
         transform: translateY(-5px);
-    }
+    } */
     
 }
