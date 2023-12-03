@@ -799,16 +799,17 @@ nav .fa-solid{
         white-space: nowrap;
  
     }
-/* .btn.btn2{
+.btn.btn2{
         font-size: 15px;
         white-space: nowrap;
-        width: 370px;
+        width: 100%;
         text-align: center;
+        font-style: italic;
         padding: 15px; 
         display: inline-block;
         background: #32ff05;
-    
-    } */
+        z-index: 1;
+    } 
 /* .btn.btn2 {
     font-size: 15px;
     white-space: nowrap;
@@ -819,7 +820,7 @@ nav .fa-solid{
     background: #32ff05;  
     z-index: 1;  
 }  */
-.btn.btn2 {
+/* .btn.btn2 {
     font-size: 15px; 
     white-space: nowrap;
     width: 100px; 
@@ -831,7 +832,7 @@ nav .fa-solid{
     z-index: 2; 
     font-style: italic;
     margin-top: 5%;
-}
+} */
 
     
     
