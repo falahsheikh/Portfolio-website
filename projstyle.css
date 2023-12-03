@@ -35,17 +35,7 @@ nav{
     text-shadow: 0 0 10px rgba(225,225,225,0.8);
     animation: glow 1.5s ease-in-out infinite;
 }
-@keyframes glow {
-    0% {
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    }
-    50% {
-        text-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
-    }
-    100% {
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    }
-}
+
 
 
 nav ul li{
@@ -102,11 +92,14 @@ nav.navbar {
     left: 0;
     width: 100%;
     z-index: 1000;
-    background-color: rgba(38, 38, 38, 0);
+    background-color: rgba(38, 38, 38, 0.003)
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0);
     border-radius: var(--navbar-border-radius);
     backdrop-filter: blur(10px);
-}
+}  
+
+
+
 
 .navbar {
     display: flex;
