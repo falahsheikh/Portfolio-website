@@ -654,7 +654,7 @@ nav.navbar {
     margin: 50px auto;
     width: fit-content;
     background-color: #26d1002c;
-    /* border: 1px solid #000000; */
+    border: 1px solid #26d100;
     padding: 14px 130px;
     border-radius: 6px;
     text-decoration: none;
@@ -847,7 +847,7 @@ nav .fa-solid{
         background: #33ff055c;
         z-index: 1;
 }  */
-.btn.btn2 {
+/* .btn.btn2 {
     font-size: 15px;
     white-space: nowrap;
     width: 100%;
@@ -856,9 +856,26 @@ nav .fa-solid{
     padding: 15px;
     display: inline-block;
     background: #33ff055c;
-    z-index: 2;  /* Set a higher z-index than the gradient overlay */
+    z-index: 2;  
     position:relative;
+} */
+
+.btn.btn2 {
+    display: block;
+    margin: 50px auto;
+    width: 100%;
+    background-color: #26d1002c;
+    border: 1px solid #26d100;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: background 0.5s;
+    margin-left: 0%;
+    font-style: italic;
 }
+.btn.btn2:hover {
+    background: #04db0b; 
+} 
 
 
 
