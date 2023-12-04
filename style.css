@@ -82,7 +82,7 @@ nav ul li{
 }
 
 nav ul li a{
-    color:#fff;
+    color:#ffffff;
     text-decoration: none;
     font-size: 18px;
     position: relative;
@@ -187,7 +187,7 @@ nav.navbar {
 }
 .tab-contents ul li .degree-title{
     font-size: medium;
-    color: #ababab;
+    color: #26d100;
 }
 .tab-links{
     margin-right: 50px;
@@ -590,7 +590,8 @@ nav.navbar {
 
 .btn:hover {
     background: #26d100;
-}
+} 
+
 
 
 /* -----------------contact--------------- */
@@ -636,7 +637,7 @@ nav.navbar {
     display: block;
     margin: 50px auto;
     width: fit-content;
-    background-color: #26d10080;
+    background-color: #26d1002c;
     /* border: 1px solid #000000; */
     padding: 14px 130px;
     border-radius: 6px;
@@ -676,7 +677,7 @@ form .btn2{
     padding: 25px;
     background: #262626;
     font-weight: 300;
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 #msg{
@@ -754,7 +755,7 @@ nav .fa-solid{
     .contact-left, .contact-right{
         flex-basis: 100%;  
     }
-    .btn{
+    /* .btn{
         display: block;
         margin: 50px auto;
         width: fit-content;
@@ -764,7 +765,23 @@ nav .fa-solid{
         text-decoration: none;
         color: #fff;
         transition: background 0.5s;
+    } */
+    .btn {
+        display: block;
+        margin: 50px auto;
+        width: fit-content;
+        background-color: #26d1002c;
+        border: 1px solid #26d100;
+        padding: 14px 130px;
+        border-radius: 6px;
+        text-decoration: none;
+        color: #ffffff;
+        transition: background 0.5s;
+        margin-left: 0%;
     }
+    .btn:hover {
+        background: #04db0b; 
+    } 
     #header {
         position: relative;
         width: 100%;
