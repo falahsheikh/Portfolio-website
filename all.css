@@ -571,11 +571,16 @@ nav.navbar {
     text-decoration: none;
     color: #ffffff;
     transition: background 0.5s;
-    font-style: italic;
+    /* font-style: italic; */
+    /* font-size:x-large; */
 }
+.btn i.fa-arrow-left-long {
+    font-size: 20px; /* Adjust the scaling factor as needed */
+  }
 .btn:hover {
     background: #04db0b; 
 } 
+
 
 
 /* -----------------contact--------------- */
@@ -754,12 +759,18 @@ nav .fa-solid{
         white-space: nowrap;
         width: 100%;
         text-align: center;
-        font-style: italic;
+        /* font-style: italic; */
         padding: 15px;
         display: inline-block;
         background: #26d1002c;
         position:relative;
+        /* font-size: x-large; */
     }
+
+  .btn i.fa-arrow-left-long {
+    font-size: 20px; /* Adjust the scaling factor as needed */
+  }
+
     /* #header {
         position: relative;
         width: 100%;
