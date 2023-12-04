@@ -731,13 +731,13 @@ nav .fa-solid{
         color: #fff;
         transition: background 0.5s;
     } */
-    .btn {
+    /* .btn {
         display: block;
         margin: 50px auto;
         width: fit-content;
         background-color: #26d1002c;
         border: 1px solid #26d100;
-        padding: 14px 130px;
+        padding: 14px 155px;
         border-radius: 6px;
         text-decoration: none;
         color: #ffffff;
@@ -747,7 +747,19 @@ nav .fa-solid{
     }
     .btn:hover {
         background: #04db0b; 
-    } 
+    }  */
+
+    .btn {
+        font-size: 15px;
+        white-space: nowrap;
+        width: 100%;
+        text-align: center;
+        font-style: italic;
+        padding: 15px;
+        display: inline-block;
+        background: #26d1002c;
+        position:relative;
+    }
     /* #header {
         position: relative;
         width: 100%;
