@@ -660,6 +660,7 @@ nav.navbar {
     text-decoration: none;
     color: #ffffff;
     transition: background 0.5s;
+    z-index: 2;
     margin-left: 0%;
     font-style: italic;
 }
@@ -870,6 +871,7 @@ nav .fa-solid{
     text-decoration: none;
     color: #ffffff;
     transition: background 0.5s;
+    z-index: 2;
     margin-left: 0%;
     font-style: italic;
 }
