@@ -571,6 +571,7 @@ nav.navbar {
     text-decoration: none;
     color: #ffffff;
     transition: background 0.5s;
+    font-style: italic;
 }
 .btn:hover {
     background: #04db0b; 
@@ -742,6 +743,7 @@ nav .fa-solid{
         color: #ffffff;
         transition: background 0.5s;
         margin-left: 0%;
+        font-style: italic;
     }
     .btn:hover {
         background: #04db0b; 
