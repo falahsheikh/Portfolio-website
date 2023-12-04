@@ -576,7 +576,7 @@ nav.navbar {
 .work img:hover {
     transform: scale(1.1);
 }
-
+/* 
 .btn {
     display: block;
     margin: 50px auto;
@@ -590,6 +590,22 @@ nav.navbar {
 
 .btn:hover {
     background: #26d100;
+}  */
+.btn {
+    display: block;
+    margin: 50px auto;
+    width: fit-content;
+    background-color: #26d1002c;
+    border: 1px solid #26d100;
+    padding: 14px 130px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: background 0.5s;
+    font-style: italic;
+}
+.btn:hover {
+    background: #04db0b; 
 } 
 
 
@@ -645,6 +661,7 @@ nav.navbar {
     color: #ffffff;
     transition: background 0.5s;
     margin-left: 0%;
+    font-style: italic;
 }
 .btn.btn2:hover {
     background: #04db0b; 
