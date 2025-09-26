@@ -1202,6 +1202,50 @@
                 margin: 0;
             }
         }
+
+        /* Footnote styles - add to existing CSS */
+        .footnote-marker {
+            font-size: 0.8em;
+            vertical-align: super;
+            color: #666666;
+            margin-left: 1px;
+        }
+
+        .dark .footnote-marker {
+            color: #999999;
+        }
+
+        .pink .footnote-marker {
+            color: #cc0000;
+        }
+
+        .ms93 .footnote-marker {
+            color: #000080;
+        }
+
+        .footnote {
+            font-size: 0.9em;
+            color: #666666;
+            margin-bottom: 8px;
+            padding-bottom: 5px;
+            border-bottom: 2px dotted #B0B0B0;
+            font-style: italic;
+        }
+
+        .dark .footnote {
+            color: #999999;
+            border-bottom: 2px dotted #666666;
+        }
+
+        .pink .footnote {
+            color: #cc0000;
+            border-bottom: 2px dotted #cc6666;
+        }
+
+        .ms93 .footnote {
+            color: #000080;
+            border-bottom: 2px dotted #666666;
+        }
     </style>
 </head>
 <body class="light">
@@ -1281,6 +1325,7 @@
         <tr>
             <td>
                 <div id="publicationsList">
+                    <div class="footnote"><b>*</b>: Equal contribution</div>
                     <div class="publication">
                         <b>Falah Sheikh</b>, Ahmed Al Marouf, Jon George Rokne, and Reda Alhajj, 
                         <i><strong>Deep Learning Models with Explainable AI 
@@ -1310,7 +1355,7 @@
                         clinical environments.">Abstract</a>]
                     </div>
                     <div class="publication">
-                        Zaid Nissar, <b>Falah Sheikh</b>, Ahmed Al Marouf, Reda Alhajj, and Jon George Rokne, 
+                        Zaid Nissar*, <b>Falah Sheikh*</b>, Ahmed Al Marouf, Reda Alhajj, and Jon George Rokne, 
                         <i><strong>Automated Lunar Age Detection
                         through Determining the Day of the Synodic Month using Convolutional Neural Networks</strong></i>, 
                         Nature Scientific Reports, 2025
@@ -1516,6 +1561,7 @@
             const input = document.getElementById('searchInput').value.toLowerCase();
             const publications = document.querySelectorAll('.publication');
             const publicationsList = document.getElementById('publicationsList');
+            const footnote = document.querySelector('.footnote');
             
             // Remove any existing "no results" message
             const existingNoResults = publicationsList.querySelector('.no-results');
@@ -1535,17 +1581,27 @@
             }
             
             const visiblePublications = [];
+            let hasAsterisk = false;
             
-            // First pass: determine which publications should be visible
+            // First pass: determine which publications should be visible and check for asterisks
             publications.forEach(pub => {
                 const text = pub.textContent.toLowerCase();
                 if (text.includes(input)) {
                     pub.style.display = '';
                     visiblePublications.push(pub);
+                    // Check if this visible publication contains asterisk characters
+                    if (pub.textContent.includes('*')) {
+                        hasAsterisk = true;
+                    }
                 } else {
                     pub.style.display = 'none';
                 }
             });
+            
+            // Show or hide the footnote based on whether any visible publications have asterisks
+            if (footnote) {
+                footnote.style.display = hasAsterisk ? 'block' : 'none';
+            }
             
             // Second pass: apply proper spacing and theme-appropriate borders to visible publications
             visiblePublications.forEach((pub, index) => {
