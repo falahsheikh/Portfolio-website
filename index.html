@@ -1160,7 +1160,7 @@
                 margin-top: 8px;
             }
             
-            /* Publications mobile adjustments */
+            /* Publications mobile */
             .publication {
                 margin-bottom: 20px;
                 padding-bottom: 12px;
@@ -1205,7 +1205,7 @@
             }
         }
 
-        /* Footnote styles - add to existing CSS */
+        /* Footnote styles */
         .footnote-marker {
             font-size: 0.8em;
             vertical-align: super;
@@ -1248,153 +1248,274 @@
             color: #000080;
             border-bottom: 2px dotted #666666;
         }
-
-        /* Floating Navigation */
+        
         .floating-nav {
             position: fixed;
-            top: 50%;
-            right: 30px;
-            transform: translateY(-50%);
-            background: #E9E9E9;
-            border: 1px solid #B4BAC0;
-            box-shadow: 2px 4px 8px rgba(0,0,0,0.3);
-            padding: 8px 0;
-            min-width: 180px;
             z-index: 1000;
+        }
+
+        /* Desktop Navigation */
+        .desktop-nav {
+            position: fixed;
+            top: 20px;
+            left: 30px;
+            transform: none;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
         }
 
-        .floating-nav.show {
+        .desktop-nav.show {
             opacity: 1;
             visibility: visible;
         }
 
-        .floating-nav a {
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Navigation Button */
+        .nav-button {
+            background: #C0C0C0;
+            border: 1px solid;
+            border-color: #dfdfdf #808080 #808080 #dfdfdf;
+            padding: 10px 14px;
+            color: #000000;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 1px 1px 0px #000000, inset 1px 1px 0px #ffffff;
+            width: 183px;
+            text-align: center;
+            position: relative;
+        }
+
+        .nav-button:hover {
+            background-color: #d7d7d7;
+        }
+
+        .nav-button:active,
+        .nav-button.active {
+            border-color: #808080 #dfdfdf #dfdfdf #808080;
+            box-shadow: 1px 1px 0px transparent, inset 1px 1px 0px #000000;
+            padding: 11px 13px 9px 15px;
+        }
+
+        /* Navigation Dropdown */
+        .nav-dropdown {
+            position: absolute;
+            background: #E9E9E9;
+            border: 1px solid;
+            border-color: #808080 #dfdfdf #dfdfdf #808080;
+            box-shadow: inset 1px 1px 0px #000000;
+            padding: 0;
+            min-width: 180px;
+            display: none;
+        }
+
+        .nav-dropdown.show {
+            display: block;
+        }
+
+        .desktop-dropdown {
+            top: 100%;
+            left: 0;
+            transform: none;
+            margin-top: 8px;
+        }
+
+        .mobile-dropdown {
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 8px;
+        }
+
+        .nav-dropdown a {
             display: block;
             padding: 8px 16px;
             color: #006699;
             text-decoration: none;
-            border-bottom: 1px solid #D0D0D0;
+            border-bottom: 1px solid #B4BAC0;
             transition: all 0.2s ease;
             font-size: 13px;
         }
 
-        .floating-nav a:last-child {
+        .nav-dropdown a:last-child {
             border-bottom: none;
         }
 
-        .floating-nav a:hover {
+        .nav-dropdown a:hover {
             background: #D0D0D0;
             color: #DD6900;
-            padding-left: 20px;
         }
 
-        /* Mobile version with button */
+        /* Hide desktop nav by default */
+        .desktop-nav {
+            display: block;
+        }
+
+        .mobile-nav {
+            display: none;
+        }
+
+        /* Dark theme */
+        .dark .nav-button {
+            background: #404040;
+            color: #CCCCCC;
+            border-color: #606060 #303030 #303030 #606060;
+            box-shadow: 1px 1px 0px #000000, inset 1px 1px 0px #707070;
+        }
+
+        .dark .nav-button:hover {
+            background: #505050;
+        }
+
+        .dark .nav-button:active,
+        .dark .nav-button.active {
+            border-color: #303030 #606060 #606060 #303030;
+            box-shadow: 1px 1px 0px transparent, inset 1px 1px 0px #000000;
+        }
+
+        .dark .nav-dropdown {
+            background: #30303e;
+            border-color: #1a1a20 #4d4d58 #4d4d58 #1a1a20;
+            box-shadow: inset 1px 1px 0px #000000;
+        }
+
+        .dark .nav-dropdown a {
+            color: #DD6900;
+            border-bottom-color: #4d4d58;
+        }
+
+        .dark .nav-dropdown a:hover {
+            background: #404050;
+            color: #4A9CC3;
+        }
+
+        /* Pink theme */
+        .pink .nav-button {
+            background: #ff9999;
+            color: #800000;
+            border-color: #ffbbbb #cc6666 #cc6666 #ffbbbb;
+        }
+
+        .pink .nav-button:hover {
+            background: #ffaaaa;
+        }
+
+        .pink .nav-button:active,
+        .pink .nav-button.active {
+            border-color: #cc6666 #ffbbbb #ffbbbb #cc6666;
+        }
+
+        .pink .nav-dropdown {
+            background: #ffcccc;
+            border-color: #cc6666 #ff9999 #ff9999 #cc6666;
+            box-shadow: inset 1px 1px 0px #aa0000;
+        }
+
+        .pink .nav-dropdown a {
+            color: #c10000;
+            border-bottom-color: #ff6666;
+        }
+
+        .pink .nav-dropdown a:hover {
+            background: #ff9999;
+            color: #518937;
+        }
+
+        /* MS93 theme */
+        .ms93 .nav-button {
+            background: #C0C0C0;
+            color: #000000;
+            border-color: #dfdfdf #808080 #808080 #dfdfdf;
+        }
+
+        .ms93 .nav-button:hover {
+            background: #D3D3D3;
+        }
+
+        .ms93 .nav-button:active,
+        .ms93 .nav-button.active {
+            border-color: #808080 #dfdfdf #dfdfdf #808080;
+        }
+
+        .ms93 .nav-dropdown {
+            background: #fffbcc;
+            border-color: #808080 #dfdfdf #dfdfdf #808080;
+            box-shadow: inset 1px 1px 0px #000000;
+        }
+
+        .ms93 .nav-dropdown a {
+            color: #0000FF;
+            border-bottom-color: #808080;
+        }
+
+        .ms93 .nav-dropdown a:hover {
+            background: #ffffff;
+            color: #FF0000;
+        }
+
+        /* Responsive mode */
         @media screen and (max-width: 768px) {
             .navbar {
                 display: none;
             }
             
-            .floating-nav {
-                bottom: 20px;
-                right: 20px;
-                top: auto;
-                transform: none;
-                background: #C0C0C0;
-                border: 1px solid;
-                border-color: #dfdfdf #808080 #808080 #dfdfdf;
-                cursor: pointer;
-                box-shadow: 3px 3px 6px rgba(0,0,0,0.4), inset 1px 1px 0px #ffffff;
-                font-size: 13px;
-                font-weight: bold;
-                color: #000000;
-                padding: 10px 14px;
-                min-width: 90px;
-                text-align: center;
-            }
-            
-            .floating-nav:hover {
-                background: #d7d7d7;
-                box-shadow: 4px 4px 8px rgba(0,0,0,0.5), inset 1px 1px 0px #ffffff;
-                transform: translateY(-2px);
-            }
-            
-            .floating-nav:active {
-                border-color: #808080 #dfdfdf #dfdfdf #808080;
-                box-shadow: 1px 1px 3px rgba(0,0,0,0.3), inset 2px 2px 4px #808080;
-                transform: translateY(1px);
-                padding: 11px 13px 9px 15px;
-            }
-            
-            .floating-nav-dropdown {
-                position: absolute;
-                bottom: 100%;
-                right: 0;
-                background: #E9E9E9;
-                border: 1px solid #B4BAC0;
-                box-shadow: 2px 4px 8px rgba(0,0,0,0.3);
-                margin-bottom: 8px;
-                padding: 8px 0;
-                min-width: 160px;
+            .desktop-nav {
                 display: none;
             }
             
-            .floating-nav-dropdown.show {
+            .mobile-nav {
                 display: block;
             }
-            
-            .floating-nav-dropdown a {
-                display: block;
-                padding: 8px 16px;
-                color: #006699;
-                text-decoration: none;
-                border-bottom: 1px solid #D0D0D0;
-                transition: all 0.2s ease;
-                font-size: 13px;
-            }
-            
-            .floating-nav-dropdown a:last-child {
-                border-bottom: none;
-            }
-            
-            .floating-nav-dropdown a:hover {
-                background: #D0D0D0;
-                color: #DD6900;
-                padding-left: 20px;
+
+            .ms93 .nav-dropdown {
+                background: #dfdfdf;
+                border-color: #808080 #dfdfdf #dfdfdf #808080;
+                box-shadow: inset 1px 1px 0px #000000;
             }
         }
     </style>
 </head>
 <!-- Floating Navigation -->
 <div class="floating-nav" id="floatingNav">
-    <!-- Desktop: Direct links -->
+    <!-- Desktop: Button with dropdown -->
     <div class="desktop-nav">
-        <a href="#profile">Profile</a>
-        <a href="#timeline">Academic Timeline</a>
-        <a href="#experience">Research Experience</a>
-        <a href="#current">Current Research</a>
-        <a href="#publications">Publications</a>
-        <a href="#presentations">Presentations</a>
-        <a href="#awards">Awards</a>
-        <a href="#connections">Connect</a>
-        <a href="#codebase">Code Bases</a>
+        <button class="nav-button" onclick="toggleDesktopNav()">////</button>
+        <div class="nav-dropdown desktop-dropdown" id="desktopNavDropdown">
+            <a href="#profile">Profile</a>
+            <a href="#timeline">Academic Timeline</a>
+            <a href="#experience">Research Experience</a>
+            <a href="#current">Current Research</a>
+            <a href="#publications">Publications</a>
+            <a href="#presentations">Presentations</a>
+            <a href="#awards">Awards</a>
+            <a href="#connections">Connect</a>
+            <a href="#codebase">Code Bases</a>
+        </div>
     </div>
     
     <!-- Mobile: Button with dropdown -->
-    <div class="mobile-nav" onclick="toggleFloatingNav()">
-        ///
-        <div class="floating-nav-dropdown" id="floatingNavDropdown">
-            <a href="#profile" onclick="closeFloatingNav()">Profile</a>
-            <a href="#timeline" onclick="closeFloatingNav()">Academic Timeline</a>
-            <a href="#experience" onclick="closeFloatingNav()">Research Experience</a>
-            <a href="#current" onclick="closeFloatingNav()">Current Research</a>
-            <a href="#publications" onclick="closeFloatingNav()">Publications</a>
-            <a href="#presentations" onclick="closeFloatingNav()">Presentations</a>
-            <a href="#awards" onclick="closeFloatingNav()">Awards</a>
-            <a href="#connections" onclick="closeFloatingNav()">Connect</a>
-            <a href="#codebase" onclick="closeFloatingNav()">Code Bases</a>
+    <div class="mobile-nav">
+        <button class="nav-button" onclick="toggleMobileNav()">////</button>
+        <div class="nav-dropdown mobile-dropdown" id="mobileNavDropdown">
+            <a href="#profile">Profile</a>
+            <a href="#timeline">Academic Timeline</a>
+            <a href="#experience">Research Experience</a>
+            <a href="#current">Current Research</a>
+            <a href="#publications">Publications</a>
+            <a href="#presentations">Presentations</a>
+            <a href="#awards">Awards</a>
+            <a href="#connections">Connect</a>
+            <a href="#codebase">Code Bases</a>
         </div>
     </div>
 </div>
@@ -1864,6 +1985,79 @@
         window.onclick = function(event) {
             if (event.target.id === 'abstractModal') closeModal();
         }
+
+        // Desktop navigation 
+        function toggleDesktopNav() {
+            const dropdown = document.getElementById('desktopNavDropdown');
+            const button = document.querySelector('.desktop-nav .nav-button');
+            
+            dropdown.classList.toggle('show');
+            button.classList.toggle('active');
+        }
+
+        function closeDesktopNav() {
+            const dropdown = document.getElementById('desktopNavDropdown');
+            const button = document.querySelector('.desktop-nav .nav-button');
+            
+            dropdown.classList.remove('show');
+            button.classList.remove('active');
+        }
+
+        // Mobile navigation 
+        function toggleMobileNav() {
+            const dropdown = document.getElementById('mobileNavDropdown');
+            const button = document.querySelector('.mobile-nav .nav-button');
+            
+            dropdown.classList.toggle('show');
+            button.classList.toggle('active');
+        }
+
+        function closeMobileNav() {
+            const dropdown = document.getElementById('mobileNavDropdown');
+            const button = document.querySelector('.mobile-nav .nav-button');
+            
+            dropdown.classList.remove('show');
+            button.classList.remove('active');
+        }
+
+        // Show desktop nav when regular navbar is not visible
+        function checkNavbarVisibility() {
+            if (window.innerWidth > 768) {
+                const navbar = document.querySelector('.navbar');
+                const desktopNav = document.querySelector('.desktop-nav');
+                
+                if (navbar) {
+                    const navbarRect = navbar.getBoundingClientRect();
+                    const isNavbarVisible = navbarRect.bottom > 0;
+                    
+                    if (!isNavbarVisible) {
+                        desktopNav.classList.add('show');
+                    } else {
+                        desktopNav.classList.remove('show');
+                        closeDesktopNav();
+                    }
+                }
+            }
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            const floatingNav = document.getElementById('floatingNav');
+            
+            if (!floatingNav.contains(event.target)) {
+                closeDesktopNav();
+                closeMobileNav();
+            }
+        });
+
+        // Check on scroll and load
+        window.addEventListener('scroll', checkNavbarVisibility);
+        window.addEventListener('load', checkNavbarVisibility);
+        window.addEventListener('resize', function() {
+            checkNavbarVisibility();
+            closeDesktopNav();
+            closeMobileNav();
+        });
     </script>
 </body>
 </html>
