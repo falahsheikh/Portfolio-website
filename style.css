@@ -577,8 +577,8 @@ body.default-dark .bio-column img {
     margin-bottom: 1rem;
     border: 2px solid var(--border-color);
 }@media (max-width: 768px) {
-    body.default .bio-column,
-    body.default-dark .bio-column {
+    body.default .bio-column h1,
+    body.default-dark .bio-column h1 {
         text-align: center;
     }
     body.default .bio-column img,
