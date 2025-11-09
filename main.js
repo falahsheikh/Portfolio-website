@@ -2,22 +2,27 @@
 // Last update: 11/9/2025
 
 // Google Analytics Configuration
-const GA_MEASUREMENT_ID = 'G-GJVRHMC2LR'; 
+// For local development: Create a config.js file with: window.GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+// For production: Set this in your hosting platform's environment variables
+const GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || 'GA_MEASUREMENT_ID';
 
 // Initialize Google Analytics
 (function() {
-    // Load gtag.js script
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-    document.head.appendChild(script);
-    
-    // Initialize dataLayer and gtag function
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    window.gtag = gtag;
-    gtag('js', new Date());
-    gtag('config', GA_MEASUREMENT_ID);
+    // Only initialize if a valid ID is provided
+    if (GA_MEASUREMENT_ID && GA_MEASUREMENT_ID !== 'GA_MEASUREMENT_ID') {
+        // Load gtag.js script
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+        document.head.appendChild(script);
+        
+        // Initialize dataLayer and gtag function
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', GA_MEASUREMENT_ID);
+    }
 })();
 
 // Load and parse the centralized data
@@ -366,37 +371,39 @@ function populateRetroView() {
     
     // Connections Table
     const connectionsTable = document.getElementById('connections-retro');
-    const connectionEntries = data.links.map(link => {
-        if (link.email) {
-            return `
-                <div class="connection-entry">
-                    <div class="email-link-container">
-                        <a href="${link.url}" class="email-link">
-                            <span class="email-label">${link.text}: </span> &nbsp;${link.email}
-                            <button class="copy-button" onclick="copyEmailRetro('${link.email}', this, event)">Copy</button>
+    const connectionEntries = data.links
+        .filter(link => link.text !== 'GitHub') // Exclude GitHub as it's in Code Bases section
+        .map(link => {
+            if (link.email) {
+                return `
+                    <div class="connection-entry">
+                        <div class="email-link-container">
+                            <a href="${link.url}" class="email-link">
+                                <span class="email-label">${link.text}: </span> &nbsp;${link.email}
+                                <button class="copy-button" onclick="copyEmailRetro('${link.email}', this, event)">Copy</button>
+                            </a>
+                        </div>
+                    </div>
+                `;
+            } else if (link.display) {
+                return `
+                    <div class="connection-entry">
+                        <a href="${link.url}" class="connections-link" target="_blank">
+                            <span class="orcid-label">${link.text}: </span> &nbsp;${link.display}
                         </a>
                     </div>
-                </div>
-            `;
-        } else if (link.display) {
-            return `
-                <div class="connection-entry">
-                    <a href="${link.url}" class="connections-link" target="_blank">
-                        <span class="orcid-label">${link.text}: </span> &nbsp;${link.display}
-                    </a>
-                </div>
-            `;
-        } else if (link.url.startsWith('http')) {
-            return `
-                <div class="connection-entry">
-                    <a href="${link.url}" class="connections-link" target="_blank">
-                        ${link.text}
-                    </a>
-                </div>
-            `;
-        }
-        return '';
-    }).join('');
+                `;
+            } else if (link.url.startsWith('http')) {
+                return `
+                    <div class="connection-entry">
+                        <a href="${link.url}" class="connections-link" target="_blank">
+                            ${link.text}
+                        </a>
+                    </div>
+                `;
+            }
+            return '';
+        }).join('');
     connectionsTable.innerHTML = `
         <tr><th>Connect</th></tr>
         <tr><td>${connectionEntries}</td></tr>
