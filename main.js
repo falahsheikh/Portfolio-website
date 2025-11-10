@@ -4,8 +4,7 @@
 // Google Analytics Configuration
 // For local development: Create a config.js file with: window.GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
 // For production: Set this in your hosting platform's environment variables
-const GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || 'GA_MEASUREMENT_ID';
-
+const GA_MEASUREMENT_ID = 'G-GJVRHMC2LR';
 // Initialize Google Analytics
 (function() {
     // Only initialize if a valid ID is provided
