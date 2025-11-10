@@ -591,6 +591,7 @@ body.default-dark .bio-short p {
     margin-bottom: 0.75rem;
     font-size: 0.9rem;
     line-height: 1.5;
+    text-align: justify;
 }body.default .bio-toggle,
 body.default-dark .bio-toggle {
     display: inline-block;
