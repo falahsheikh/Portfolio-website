@@ -499,6 +499,17 @@ function initializeTheme() {
     } catch (e) {
         document.body.className = 'default';
     }
+    document.querySelectorAll('.theme-option').forEach(option => {
+        option.classList.remove('active');
+        // Get theme name from onclick attribute
+        const onclickAttr = option.getAttribute('onclick');
+        if (onclickAttr) {
+            const themeName = onclickAttr.match(/setTheme\('([^']+)'\)/)?.[1];
+            if (themeName === currentTheme) {
+                option.classList.add('active');
+            }
+        }
+    });
 }
 
 // EVENT LISTENERS
