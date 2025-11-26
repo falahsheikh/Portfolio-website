@@ -1210,21 +1210,136 @@ body.retro-ms93 .modal-header {
 }body.retro-ms93 .modal-header {
     background: #000080;
     border-bottom-color: #808080;
-}body.retro .modal-close,
+}body.retro .modal-header,
+body.retro-dark .modal-header,
+body.retro-pink .modal-header,
+body.retro-ms93 .modal-header {
+    background: #006699;
+    color: white;
+    padding: 8px;
+    border-bottom: 1px solid #00557F;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+body.retro-dark .modal-header {
+    background: #003854;
+    border-bottom-color: #444444;
+}
+
+body.retro-pink .modal-header {
+    background: #ff6666;
+    border-bottom-color: #ff0000;
+}
+
+body.retro-ms93 .modal-header {
+    background: #000080;
+    border-bottom-color: #808080;
+}
+
+body.retro .modal-header h3,
+body.retro-dark .modal-header h3,
+body.retro-pink .modal-header h3,
+body.retro-ms93 .modal-header h3 {
+    margin: 0;
+    font-size: 16px;
+    order: 1;
+}
+
+body.retro .modal-close,
 body.retro-dark .modal-close,
 body.retro-pink .modal-close,
 body.retro-ms93 .modal-close {
-    color: white;
-    font-size: 24px;
+    background: #FF0000;
+    border: 1px solid;
+    border-color: #ff6666 #990000 #990000 #ff6666;
+    padding: 2px 8px;
+    color: #FFFFFF;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    border: none;
-    background: none;
-}body.retro .modal-close:hover,
+    box-shadow: 1px 1px 0px #000000, inset 1px 1px 0px #ff9999;
+    line-height: 1;
+    min-width: 24px;
+    text-align: center;
+    order: 2;
+}
+
+body.retro .modal-close:hover,
 body.retro-dark .modal-close:hover,
 body.retro-pink .modal-close:hover,
 body.retro-ms93 .modal-close:hover {
-    color: #ccc;
+    background: #C0C0C0;
+    border-color: #dfdfdf #808080 #808080 #dfdfdf;
+    color: #000000;
+    box-shadow: 1px 1px 0px #000000, inset 1px 1px 0px #ffffff;
+}
+
+body.retro .modal-close:active,
+body.retro-dark .modal-close:active,
+body.retro-pink .modal-close:active,
+body.retro-ms93 .modal-close:active {
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
+    box-shadow: 1px 1px 0px transparent, inset 1px 1px 0px #000000;
+    padding: 3px 7px 1px 9px;
+}
+
+body.retro-dark .modal-close {
+    background: #CC0000;
+    color: #FFFFFF;
+    border-color: #ff3333 #880000 #880000 #ff3333;
+    box-shadow: 1px 1px 0px #000000, inset 1px 1px 0px #ff6666;
+}
+
+body.retro-dark .modal-close:hover {
+    background: #404040;
+    color: #FFFFFF;
+    border-color: #606060 #303030 #303030 #606060;
+    box-shadow: 1px 1px 0px #000000, inset 1px 1px 0px #707070;
+}
+
+body.retro-dark .modal-close:active {
+    border-color: #303030 #606060 #606060 #303030;
+    box-shadow: 1px 1px 0px transparent, inset 1px 1px 0px #000000;
+}
+
+body.retro-pink .modal-close {
+    background: #FF0000;
+    color: #FFFFFF;
+    border-color: #ff6666 #cc0000 #cc0000 #ff6666;
+    box-shadow: 1px 1px 0px #000000, inset 1px 1px 0px #ff9999;
+}
+
+body.retro-pink .modal-close:hover {
+    background: #ff9999;
+    color: #000000;
+    border-color: #ffbbbb #cc6666 #cc6666 #ffbbbb;
+    box-shadow: 1px 1px 0px #000000, inset 1px 1px 0px #ffcccc;
+}
+
+body.retro-pink .modal-close:active {
+    border-color: #cc6666 #ffbbbb #ffbbbb #cc6666;
+    box-shadow: 1px 1px 0px transparent, inset 1px 1px 0px #cc0000;
+}
+
+body.retro-ms93 .modal-close {
+    background: #FF0000;
+    color: #FFFFFF;
+    border-color: #ff6666 #990000 #990000 #ff6666;
+    box-shadow: 1px 1px 0px #000000, inset 1px 1px 0px #ff9999;
+}
+
+body.retro-ms93 .modal-close:hover {
+    background: #C0C0C0;
+    color: #000000;
+    border-color: #dfdfdf #808080 #808080 #dfdfdf;
+    box-shadow: 1px 1px 0px #000000, inset 1px 1px 0px #ffffff;
+}
+
+body.retro-ms93 .modal-close:active {
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
+    box-shadow: 1px 1px 0px transparent, inset 1px 1px 0px #000000;
 }body.retro .modal-body,
 body.retro-dark .modal-body,
 body.retro-pink .modal-body,
