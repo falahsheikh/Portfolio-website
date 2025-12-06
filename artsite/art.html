@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #fcfbf8;
+            color: #1a1a1a;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color:azure;
+            background-size: 400px;
+            background-repeat: repeat;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* ============================================
+           INTRO PAGE STYLES
+           ============================================ */
+        .intro-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #fcfbf8;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.8s ease;
+            overflow: hidden;
+        }
+
+        .intro-page.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .intro-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeIn 1.5s ease 0.2s forwards;
+        }
+
+        .intro-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: contrast(1.05) brightness(0.85) grayscale(0.3);
+        }
+
+        .intro-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            padding: 3rem;
+            background: rgba(252, 251, 248, 0);
+            border: 1px solid rgba(229, 227, 221, 0);
+        }
+
+        .intro-name {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.4rem;
+            font-weight: 300;
+            color: #fcfbf8;
+        }
+
+        .intro-name span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(30px) rotate(-5deg);
+        }
+
+        .intro-name span:nth-child(1) { animation: letterDrop 0.6s ease 0.1s forwards; }
+        .intro-name span:nth-child(2) { animation: letterDrop 0.6s ease 0.2s forwards; }
+        .intro-name span:nth-child(3) { animation: letterDrop 0.6s ease 0.3s forwards; }
+        .intro-name span:nth-child(4) { animation: letterDrop 0.6s ease 0.4s forwards; }
+        .intro-name span:nth-child(5) { animation: letterDrop 0.6s ease 0.5s forwards; }
+        .intro-name span:nth-child(6) { animation: letterDrop 0.6s ease 0.55s forwards; }
+        .intro-name span:nth-child(7) { animation: letterDrop 0.6s ease 0.6s forwards; }
+
+        .intro-tagline {
+            font-size: 0.9rem;
+            color: #fcfbf8;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.8s forwards;
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.1rem;
+        }
+
+        .intro-enter {
+            font-size: 0.75rem;
+            color: #fcfbf8;
+            cursor: pointer;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 1s forwards;
+            border: 1px solid #fcfbf8;
+            padding: 1rem 3rem;
+            background: none;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s ease;
+            letter-spacing: 0.15rem;
+            text-transform: uppercase;
+        }
+
+        .intro-enter:hover {
+            background: rgba(26, 26, 26, 0); 
+            color: #fcfbf8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px); 
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes letterDrop {
+            from {
+                opacity: 0;
+                transform: translateY(30px) rotate(-5deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+
+        @keyframes floatIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* ============================================
+           MAIN PORTFOLIO STYLES
+           ============================================ */
+        .main-content {
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            padding: 3rem 2rem;
+            position: relative;
+        }
+
+        .main-content.visible {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            border: 2px solid #1a1a1a;
+            overflow: hidden;
+        }
+
+        .header-text {
+            padding: 2.5rem;
+            background: #fcfbf8;
+            flex: 0 0 auto;
+            border-right: 2px solid #1a1a1a;
+        }
+
+        .header-gif {
+            flex: 1;
+            min-height: 120px;
+            background-image: var(--header-gif);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .name {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-shadow: 
+                -1px -1px 0 #fcfbf8,
+                1px -1px 0 #fcfbf8,
+                -1px 1px 0 #fcfbf8,
+                1px 1px 0 #fcfbf8,
+                -2px -2px 0 #fcfbf8,
+                2px -2px 0 #fcfbf8,
+                -2px 2px 0 #fcfbf8,
+                2px 2px 0 #fcfbf8;
+        }
+
+        .tagline {
+            font-size: 0.95rem;
+            color: #000000;
+            font-weight: 600;
+            text-shadow: 
+                -1px -1px 0 #fcfbf8,
+                1px -1px 0 #fcfbf8,
+                -1px 1px 0 #fcfbf8,
+                1px 1px 0 #fcfbf8,
+                -1.5px -1.5px 0 #fcfbf8,
+                1.5px -1.5px 0 #fcfbf8,
+                -1.5px 1.5px 0 #fcfbf8,
+                1.5px 1.5px 0 #fcfbf8;
+        }
+
+        .index {
+            margin-top: 25px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+        }
+
+        .index-item {
+            cursor: pointer;
+            padding: 2.5rem;
+            padding-left: 3rem;
+            border-bottom: 2px solid #1a1a1a;
+            border-right: 2px solid #1a1a1a;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .index-item:nth-child(3n) {
+            border-right: none;
+        }
+
+        .index-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: var(--album-gif);
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .index-item:hover {
+            padding-left: 3.5rem;
+        }
+
+        .index-item:hover::before {
+            opacity: 0.3;
+        }
+
+        .index-info {
+            min-width: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .index-number {
+            font-size: 0.85rem;
+            color: #000000;
+            margin-bottom: 0.7rem;
+            font-weight: 700;
+            text-shadow: 
+                -1px -1px 0 #fcfbf8,
+                1px -1px 0 #fcfbf8,
+                -1px 1px 0 #fcfbf8,
+                1px 1px 0 #fcfbf8,
+                -1.5px -1.5px 0 #fcfbf8,
+                1.5px -1.5px 0 #fcfbf8,
+                -1.5px 1.5px 0 #fcfbf8,
+                1.5px 1.5px 0 #fcfbf8;
+        }
+
+        .index-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-shadow: 
+                -1px -1px 0 #fcfbf8,
+                1px -1px 0 #fcfbf8,
+                -1px 1px 0 #fcfbf8,
+                1px 1px 0 #fcfbf8,
+                -2px -2px 0 #fcfbf8,
+                2px -2px 0 #fcfbf8,
+                -2px 2px 0 #fcfbf8,
+                2px 2px 0 #fcfbf8;
+        }
+
+        .index-count {
+            font-size: 0.9rem;
+            color: #000000;
+            font-weight: 600;
+            text-shadow: 
+                -1px -1px 0 #fcfbf8,
+                1px -1px 0 #fcfbf8,
+                -1px 1px 0 #fcfbf8,
+                1px 1px 0 #fcfbf8,
+                -1.5px -1.5px 0 #fcfbf8,
+                1.5px -1.5px 0 #fcfbf8,
+                -1.5px 1.5px 0 #fcfbf8,
+                1.5px 1.5px 0 #fcfbf8;
+        }
+
+        .view {
+            display: none;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        .view-header {
+            margin-bottom: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px solid #000000;
+            padding-bottom: 1rem;
+            padding-top: 1rem;
+        }
+
+        .view-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-shadow: 
+                -1px -1px 0 #fcfbf8,
+                1px -1px 0 #fcfbf8,
+                -1px 1px 0 #fcfbf8,
+                1px 1px 0 #fcfbf8;
+        }
+
+        .view-actions {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .view-info {
+            font-size: 0.85rem;
+            color: #000000;
+            font-weight: 600;
+        }
+
+        .back-btn {
+            font-size: 0.85rem;
+            color: #000000;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: 'Courier New', monospace;
+            transition: color 0.2s;
+            font-weight: 600;
+        }
+
+        .back-btn:hover {
+            color: #1a1a1a;
+        }
+
+        .works {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem 1.5rem;
+        }
+
+        .work {
+            cursor: pointer;
+        }
+
+        .work img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            margin-bottom: 0.7rem;
+            transition: opacity 0.2s;
+            filter: contrast(1.05) brightness(0.98);
+        }
+
+        .work:hover img {
+            opacity: 0.6;
+        }
+
+        .work-title {
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+            text-shadow: 
+                -0.5px -0.5px 0 #fcfbf8,
+                0.5px -0.5px 0 #fcfbf8,
+                -0.5px 0.5px 0 #fcfbf8,
+                0.5px 0.5px 0 #fcfbf8;
+        }
+
+        .work-meta {
+            font-size: 0.75rem;
+            color: #999;
+            font-weight: 600;
+        }
+
+        .writings {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem 2rem;
+        }
+
+        .writing {
+            cursor: pointer;
+            border-bottom: 1px solid #000000;
+            padding-bottom: 2rem;
+        }
+
+        .writing-number {
+            font-size: 0.75rem;
+            color: #999;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+        }
+
+        .writing-title {
+            font-size: 1.05rem;
+            margin-bottom: 0.4rem;
+            font-weight: 700;
+            text-shadow: 
+                -0.5px -0.5px 0 #fcfbf8,
+                0.5px -0.5px 0 #fcfbf8,
+                -0.5px 0.5px 0 #fcfbf8,
+                0.5px 0.5px 0 #fcfbf8;
+        }
+
+        .writing-meta {
+            font-size: 0.8rem;
+            color: #999;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .writing-excerpt {
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: #666;
+        }
+
+        .writing:hover .writing-excerpt {
+            color: #1a1a1a;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #fcfbf8;
+            z-index: 1000;
+            padding: 3rem;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal-nav {
+            position: fixed;
+            top: 0;               
+            left: 0;
+            right: 0;
+            background: #fcfbf8;  
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 3rem 0 3rem; 
+        }
+
+        .modal-close {
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #1a1a1a;
+            font-family: 'Courier New', monospace;
+        }
+
+        .modal-nav-right {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .modal-zoom-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .zoom-btn {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-family: 'Courier New', monospace;
+            transition: color 0.2s;
+            padding: 0.3rem 0.5rem;
+        }
+
+        .zoom-btn:hover:not(:disabled) {
+            color: #1a1a1a;
+        }
+
+        .zoom-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .zoom-level {
+            font-size: 0.7rem;
+            color: #999;
+            min-width: 3rem;
+            text-align: center;
+        }
+
+        .modal-arrows {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .modal-arrow {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-family: 'Courier New', monospace;
+            transition: color 0.2s;
+        }
+
+        .modal-arrow:hover:not(:disabled) {
+            color: #1a1a1a;
+        }
+
+        .modal-arrow:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .modal-content {
+            max-width: 900px;
+            margin: 5rem auto 0;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 2rem;
+            filter: contrast(1.05) brightness(0.98);
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-content img.zoomed {
+            cursor: zoom-out;
+            transform: scale(var(--zoom-level, 1));
+            transform-origin: var(--zoom-x, 50%) var(--zoom-y, 50%);
+        }
+
+        .modal-content img.zoomed-max {
+            cursor: grab;
+        }
+
+        .modal-content img.zoomed-max:active {
+            cursor: grabbing;
+        }
+
+        .modal-text {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .modal-text h1 {
+            font-size: 1.3rem;
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-text .meta {
+            font-size: 0.75rem;
+            color: #999;
+            margin-bottom: 3rem;
+        }
+
+        .modal-text p {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: #1a1a1a;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+            font-weight: bolder;
+        }
+
+        .about-btn:hover {
+            background: rgba(26, 26, 26, 0.2);
+            transform: scale(1.05);
+        }
+
+        .about-popup {
+            position: absolute;
+            bottom: 50px;
+            right: 0;
+            background: #fcfbf8;
+            border: 1px solid #1a1a1a;
+            padding: 1rem 1.5rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .about-btn:hover .about-popup {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .about-popup a {
+            color: #1a1a1a;
+            text-decoration: none;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .about-popup a:hover {
+            opacity: 0.7;
+            color: blueviolet;
+        }
+
+        @media (max-width: 1024px) {
+            .index {
+                grid-template-columns: 1fr;
+            }
+
+            .index-item {
+                border-right: none;
+            }
+
+            .works {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .writings {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                flex-direction: column;
+            }
+
+            .header-text {
+                border-right: none;
+                border-bottom: 2px solid #1a1a1a;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .works {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .modal-nav {
+                padding: 0 1.5rem;
+            }
+
+            .modal-content {
+                margin-top: 4rem;
+            }
+
+            .intro-name {
+                font-size: 2rem;
+                letter-spacing: 0.2rem;
+            }
+
+            .intro-content {
+                padding: 2rem;
+            }
+
+            .index-title {
+                font-size: 1.1rem;
+            }
+
+            .name {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .works {
+                grid-template-columns: 1fr;
+            }
+
+            .intro-name {
+                font-size: 1.5rem;
+                letter-spacing: 0.15rem;
+            }
+
+            .intro-content {
+                padding: 1.5rem;
+            }
+
+            .index-title {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- About button - always visible -->
+    <div class="about-btn">
+        𓆏
+        <div class="about-popup">
+            author · <a href="https://falahsheikh.com/">visit</a>
+        </div>
+    </div>
+
+    <!-- INTRO PAGE -->
+    <div id="intro-page" class="intro-page">
+        <div class="intro-background">
+            <img src="./banner/banner.webp" alt="">
+        </div>
+        <div class="intro-content">
+            <div class="intro-name">
+                <span>f</span><span>a</span><span>l</span><span>a</span><span>h</span><span>'</span><span>s</span>
+            </div>
+            <div class="intro-tagline">art collections & writing</div>
+            <button class="intro-enter" onclick="enterSite()">enter</button>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content" id="main-content">
+        <div class="container">
+            <div class="header">
+                <div class="header-text">
+                    <div class="name">falah's</div>
+                    <div class="tagline">art collections & writing</div>
+                </div>
+                <div class="header-gif"></div>
+            </div>
+
+            <!-- INDEX VIEW -->
+            <div id="index-view" class="view active">
+                <!-- Albums/folders will be dynamically generated here -->
+            </div>
+
+            <!-- ALBUM VIEWS -->
+            <div id="album-views">
+                <!-- Album detail views will be dynamically generated here -->
+            </div>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-nav">
+            <button class="modal-close" onclick="closeModal()">close</button>
+            <div class="modal-nav-right">
+                <div class="modal-zoom-controls" id="zoom-controls" style="display:none;">
+                    <button class="zoom-btn" id="zoom-out-btn" onclick="zoomOut()">-</button>
+                    <span class="zoom-level" id="zoom-level">100%</span>
+                    <button class="zoom-btn" id="zoom-in-btn" onclick="zoomIn()">+</button>
+                    <button class="zoom-btn" onclick="resetZoom()">reset</button>
+                </div>
+                <div class="modal-arrows">
+                    <button class="modal-arrow" id="prev-btn" onclick="navigate(-1)">← prev</button>
+                    <button class="modal-arrow" id="next-btn" onclick="navigate(1)">next →</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-content" id="modal-content"></div>
+    </div>
+
+    <script>
+        // ========================
+        // EDIT ONLY THIS SECTION 
+        // ========================
+        
+        const CONFIG = {
+            // Global GIF settings - set once, applies everywhere
+            defaultGif: './gifs/giphy2.webp',      // Default GIF for all albums
+            headerGif: './gifs/giphy6.webp',       // GIF for main header
+            
+            // Site info
+            siteName: "falah's",
+            siteTagline: "art collections & writing",
+            introBannerImage: "./banner/banner.webp",
+            
+            // Albums - Simple configuration
+            albums: [
+                {
+                    title: 'cool imgs',
+                    type: 'images',                    // 'images' or 'writing'
+                    folder: './imagefolders/intrestingimg',         // For image albums only
+                    gif: './gifs/giphy2.webp',         // Optional: override default GIF
+                    // IMPORTANT: List your images explicitly here
+                    images: [
+                        { path: './imagefolders/intrestingimg/5o7egtw2jaa71.png', filename: '5o7egtw2jaa71.png' }
+                        // Add more images as you add them to the folder:
+                        // { path: './intrestingimg/image2.jpg', filename: 'image2.jpg' },
+                        // { path: './intrestingimg/image3.png', filename: 'image3.png' },
+                    ]
+                },
+                // {
+                //     title: 'figure drawings',
+                //     type: 'images',
+                //     folder: 'images/figure-drawings',
+                //     gif: './gifs/time.gif'
+                // },
+                {
+                    title: 'water imgs',
+                    type: 'photography',                // Special type: no titles under images
+                    folder: './imagefolders/water',
+                    gif: './gifs/photos.gif',
+                    images: [
+                        { path: './imagefolders/water/gartmore.jpg', filename: 'gartmore_falls.png' }
+                    ]
+                },
+                // {
+                //     title: 'essays',
+                //     type: 'writing',
+                //     gif: './gifs/200w.webp',
+                //     pieces: [
+                //         {
+                //             title: 'on light and memory',
+                //             meta: 'essay · 2024',
+                //             excerpt: 'The light fell differently that afternoon. Through the window, dust particles suspended in golden rays, each one a small universe...',
+                //             fullText: `
+                //                 <p>The light fell differently that afternoon. Through the window, dust particles suspended in golden rays, each one a small universe floating in space. I sat there watching them, thinking about how memory works—how certain moments crystallize while others dissolve into the general haze of time.</p>
+                //                 <p>It was the quality of light that stayed with me, years later. Not the conversation, not the specific words exchanged, but the way sunlight slanted through venetian blinds, striping everything in alternating bands of illumination and shadow.</p>
+                //                 <p>Memory is selective in ways we don't fully understand. It preserves not the complete experience but fragments—sensory impressions, emotional resonances, the feeling of a moment rather than its facts.</p>
+                //             `
+                //         },
+                //         {
+                //             title: 'silence in cities',
+                //             meta: 'essay · 2023',
+                //             excerpt: 'There are pockets of silence in every city, if you know where to look. Not the absence of sound, but a different quality of stillness...',
+                //             fullText: `
+                //                 <p>There are pockets of silence in every city, if you know where to look. Not the absence of sound, but a different quality of stillness—a pause in the urban rhythm, spaces where the city takes a breath.</p>
+                //                 <p>I discovered one such place by accident, turning down an unfamiliar street. The noise of traffic faded behind me, replaced by the soft rustling of leaves and distant birdsong.</p>
+                //                 <p>These moments of quiet feel stolen, precious. They remind us that even in our most constructed environments, there are gaps—cracks in the concrete where something else can grow.</p>
+                //             `
+                //         }
+                //     ]
+                // },
+                // {
+                //     title: 'poetry',
+                //     type: 'writing',
+                //     gif: './gifs/poems.gif',
+                //     pieces: [
+                //         {
+                //             title: 'fragments',
+                //             meta: 'poetry · 2024',
+                //             excerpt: 'scattered pages / half-written thoughts / the way rain sounds / against old windows...',
+                //             fullText: `
+                //                 <p>scattered pages<br>half-written thoughts<br>the way rain sounds<br>against old windows</p>
+                //                 <p>memory like water<br>seeping through cracks<br>in well-worn floors</p>
+                //                 <p>we gather what we can<br>hold tight to fragments<br>of days that slip away<br>like sand through fingers</p>
+                //             `
+                //         },
+                //         {
+                //             title: 'late autumn',
+                //             meta: 'poetry · 2023',
+                //             excerpt: 'leaves fall / without ceremony / carpeting sidewalks / in shades of rust...',
+                //             fullText: `
+                //                 <p>leaves fall<br>without ceremony<br>carpeting sidewalks<br>in shades of rust</p>
+                //                 <p>the year turning inward<br>drawing breath<br>before the long silence</p>
+                //                 <p>we walk through it<br>kicking up memories<br>brittle and brown</p>
+                //             `
+                //         }
+                //     ]
+                // }
+            ]
+        };
+        
+        // ===================
+        // AUTO-CONFIGURATION, no need to edit
+        // ===================
+        
+        // Apply header GIF
+        document.querySelector('.header-gif').style.setProperty('--header-gif', `url(${CONFIG.headerGif})`);
+        document.querySelector('.header-gif').style.backgroundImage = `url(${CONFIG.headerGif})`;
+        
+        // Process albums and add auto-numbering
+        const albums = CONFIG.albums.map((album, index) => {
+            const processedAlbum = {
+                id: album.title.toLowerCase().replace(/\s+/g, '-'),
+                number: String(index + 1).padStart(2, '0'),
+                title: album.title,
+                type: album.type,
+                gif: album.gif || CONFIG.defaultGif,
+                folder: album.folder,
+                pieces: album.pieces,
+                images: album.images // Use pre-defined images if provided
+            };
+            return processedAlbum;
+        });
+
+        // ==================
+        // APPLICATION CODE
+        // ==================
+        let currentCategory = '';
+        let currentAlbumId = '';
+        let currentIndex = 0;
+        let currentItems = [];
+        let zoomLevel = 1;
+        let isDragging = false;
+        let startX, startY, scrollLeft, scrollTop;
+
+        async function init() {
+            // Load images for image-type albums (only if not pre-defined)
+            for (let album of albums) {
+                if (album.type !== 'writing' && !album.images) {
+                    album.images = await loadImagesFromFolder(album);
+                }
+            }
+
+            // Calculate counts
+            albums.forEach(album => {
+                if (album.type === 'writing') {
+                    album.count = `${album.pieces.length} ${album.pieces.length === 1 ? 'piece' : 'pieces'}`;
+                } else {
+                    album.count = `${album.images.length} ${album.images.length === 1 ? 'work' : 'works'}`;
+                }
+            });
+            
+            generateIndexView();
+            generateAlbumViews();
+            setupEventListeners();
+        }
+
+        async function loadImagesFromFolder(album) {
+            // Try to fetch images from the folder
+            try {
+                const response = await fetch(album.folder);
+                if (response.ok) {
+                    const text = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(text, 'text/html');
+                    const links = Array.from(doc.querySelectorAll('a'));
+                    
+                    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
+                    const imageFiles = links
+                        .map(link => link.getAttribute('href'))
+                        .filter(href => href && imageExtensions.some(ext => href.toLowerCase().endsWith(ext)));
+                    
+                    if (imageFiles.length > 0) {
+                        return imageFiles.map(filename => ({
+                            path: `${album.folder}/${filename}`,
+                            filename: filename
+                        }));
+                    }
+                }
+            } catch (error) {
+                console.log('Could not auto-load images, using demo images');
+            }
+            
+            // Fallback to demo images - none
+            const demoUrls = [
+            ];
+            
+            return demoUrls.map((url, i) => ({
+                path: url,
+                filename: `demo-${i}.jpg`
+            }));
+        }
+
+        function enterSite() {
+            document.getElementById('intro-page').classList.add('fade-out');
+            setTimeout(() => {
+                document.getElementById('intro-page').style.display = 'none';
+                document.getElementById('main-content').classList.add('visible');
+            }, 800);
+        }
+
+        function generateIndexView() {
+            const indexView = document.getElementById('index-view');
+            let indexHTML = '<div class="index">';
+
+            albums.forEach((album) => {
+                indexHTML += `
+                    <div class="index-item" data-album-id="${album.id}" onclick="showAlbum('${album.id}')" style="--album-gif: url(${album.gif})">
+                        <div class="index-info">
+                            <div class="index-number">${album.number}</div>
+                            <div class="index-title">${album.title}</div>
+                            <div class="index-count">${album.count}</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            indexHTML += '</div>';
+            indexView.innerHTML = indexHTML;
+        }
+
+        function generateAlbumViews() {
+            const container = document.getElementById('album-views');
+            
+            albums.forEach(album => {
+                const viewHTML = album.type === 'writing' 
+                    ? generateWritingAlbumView(album)
+                    : generateImageAlbumView(album);
+                container.innerHTML += viewHTML;
+            });
+        }
+
+        function generateImageAlbumView(album) {
+            const worksHTML = album.images.map((imgObj) => {
+                return `
+                    <div class="work" data-album="${album.id}" data-img="${imgObj.path}">
+                        <img src="${imgObj.path}" alt="">
+                    </div>
+                `;
+            }).join('');
+
+            return `
+                <div id="album-${album.id}" class="view">
+                    <div class="view-header">
+                        <div class="view-title">${album.number} — ${album.title}</div>
+                        <div class="view-actions">
+                            <div class="view-info">${album.count}</div>
+                            <button class="back-btn" onclick="showView('index')">← back</button>
+                        </div>
+                    </div>
+                    <div class="works">${worksHTML}</div>
+                </div>
+            `;
+        }
+
+        function generateWritingAlbumView(album) {
+            const writingsHTML = album.pieces.map((piece, idx) => `
+                <div class="writing" data-album="${album.id}">
+                    <div class="writing-number">${String(idx + 1).padStart(3, '0')}</div>
+                    <div class="writing-title">${piece.title}</div>
+                    <div class="writing-meta">${piece.meta}</div>
+                    <div class="writing-excerpt">${piece.excerpt}</div>
+                    <div class="full-text" style="display:none;">${piece.fullText}</div>
+                </div>
+            `).join('');
+
+            return `
+                <div id="album-${album.id}" class="view">
+                    <div class="view-header">
+                        <div class="view-title">${album.number} — ${album.title}</div>
+                        <div class="view-actions">
+                            <div class="view-info">${album.count}</div>
+                            <button class="back-btn" onclick="showView('index')">← back</button>
+                        </div>
+                    </div>
+                    <div class="writings">${writingsHTML}</div>
+                </div>
+            `;
+        }
+
+        function setupEventListeners() {
+            document.querySelectorAll('.work').forEach((work) => {
+                work.onclick = function() {
+                    currentAlbumId = this.dataset.album;
+                    currentItems = Array.from(document.querySelectorAll(`[data-album="${currentAlbumId}"].work`));
+                    currentIndex = currentItems.indexOf(this);
+                    showWork(currentIndex);
+                };
+            });
+
+            document.querySelectorAll('.writing').forEach((writing) => {
+                writing.onclick = function() {
+                    currentAlbumId = this.dataset.album;
+                    currentItems = Array.from(document.querySelectorAll(`[data-album="${currentAlbumId}"].writing`));
+                    currentIndex = currentItems.indexOf(this);
+                    showWriting(currentIndex);
+                };
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeModal();
+                if (document.getElementById('modal').classList.contains('active')) {
+                    if (e.key === 'ArrowLeft') navigate(-1);
+                    if (e.key === 'ArrowRight') navigate(1);
+                }
+            });
+        }
+
+        function showView(viewName) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(`${viewName}-view`).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function showAlbum(albumId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(`album-${albumId}`).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function showWork(index) {
+            const work = currentItems[index];
+            const img = work.dataset.img;
+            
+            document.getElementById('modal-content').innerHTML = `
+                <img src="${img}" alt="">
+            `;
+            
+            updateNavButtons();
+            resetZoom();
+            setupImageZoom();
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function showWriting(index) {
+            const writing = currentItems[index];
+            const title = writing.querySelector('.writing-title').textContent;
+            const meta = writing.querySelector('.writing-meta').textContent;
+            const fullText = writing.querySelector('.full-text').innerHTML;
+            
+            document.getElementById('modal-content').innerHTML = `
+                <div class="modal-text">
+                    <h1>${title}</h1>
+                    <div class="meta">${meta}</div>
+                    ${fullText}
+                </div>
+            `;
+            
+            updateNavButtons();
+            document.getElementById('zoom-controls').style.display = 'none';
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function navigate(direction) {
+            currentIndex = Math.max(0, Math.min(currentIndex + direction, currentItems.length - 1));
+            
+            const isWriting = currentItems[currentIndex].classList.contains('writing');
+            if (isWriting) {
+                showWriting(currentIndex);
+            } else {
+                showWork(currentIndex);
+            }
+        }
+
+        function updateNavButtons() {
+            document.getElementById('prev-btn').disabled = currentIndex === 0;
+            document.getElementById('next-btn').disabled = currentIndex === currentItems.length - 1;
+        }
+
+        function setupImageZoom() {
+            const modalContent = document.getElementById('modal-content');
+            const img = modalContent.querySelector('img');
+            
+            if (!img) {
+                document.getElementById('zoom-controls').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('zoom-controls').style.display = 'flex';
+            
+            img.onclick = function(e) {
+                if (zoomLevel === 1) {
+                    const rect = img.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    
+                    zoomLevel = 2;
+                    img.style.setProperty('--zoom-x', x + '%');
+                    img.style.setProperty('--zoom-y', y + '%');
+                    img.style.setProperty('--zoom-level', zoomLevel);
+                    img.classList.add('zoomed');
+                    updateZoomUI();
+                } else {
+                    resetZoom();
+                }
+            };
+            
+            modalContent.addEventListener('wheel', function(e) {
+                if (e.ctrlKey || e.metaKey) {
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomIn();
+                    } else {
+                        zoomOut();
+                    }
+                }
+            }, { passive: false });
+            
+            img.addEventListener('mousedown', function(e) {
+                if (zoomLevel > 1) {
+                    isDragging = true;
+                    startX = e.pageX - modalContent.offsetLeft;
+                    startY = e.pageY - modalContent.offsetTop;
+                    scrollLeft = modalContent.scrollLeft;
+                    scrollTop = modalContent.scrollTop;
+                    img.style.cursor = 'grabbing';
+                }
+            });
+            
+            document.addEventListener('mousemove', function(e) {
+                if (!isDragging) return;
+                e.preventDefault();
+                const x = e.pageX - modalContent.offsetLeft;
+                const y = e.pageY - modalContent.offsetTop;
+                const walkX = (x - startX) * 2;
+                const walkY = (y - startY) * 2;
+                modalContent.scrollLeft = scrollLeft - walkX;
+                modalContent.scrollTop = scrollTop - walkY;
+            });
+            
+            document.addEventListener('mouseup', function() {
+                isDragging = false;
+                const img = document.querySelector('#modal-content img');
+                if (img && zoomLevel > 1) {
+                    img.style.cursor = 'grab';
+                }
+            });
+        }
+        
+        function zoomIn() {
+            if (zoomLevel < 3) {
+                zoomLevel += 0.25;
+                applyZoom();
+            }
+        }
+        
+        function zoomOut() {
+            if (zoomLevel > 0.5) {
+                zoomLevel -= 0.25;
+                applyZoom();
+            }
+        }
+        
+        function resetZoom() {
+            zoomLevel = 1;
+            const img = document.querySelector('#modal-content img');
+            if (img) {
+                img.style.setProperty('--zoom-level', 1);
+                img.classList.remove('zoomed', 'zoomed-max');
+                img.style.cursor = 'zoom-in';
+            }
+            updateZoomUI();
+        }
+        
+        function applyZoom() {
+            const img = document.querySelector('#modal-content img');
+            if (img) {
+                img.style.setProperty('--zoom-level', zoomLevel);
+                
+                if (zoomLevel !== 1) {
+                    img.classList.add('zoomed');
+                } else {
+                    img.classList.remove('zoomed');
+                }
+                
+                if (zoomLevel >= 3) {
+                    img.classList.add('zoomed-max');
+                } else {
+                    img.classList.remove('zoomed-max');
+                }
+                
+                if (zoomLevel > 1) {
+                    img.style.cursor = 'grab';
+                } else if (zoomLevel < 1) {
+                    img.style.cursor = 'zoom-in';
+                } else {
+                    img.style.cursor = 'zoom-in';
+                }
+            }
+            updateZoomUI();
+        }
+        
+        function updateZoomUI() {
+            document.getElementById('zoom-level').textContent = Math.round(zoomLevel * 100) + '%';
+            document.getElementById('zoom-in-btn').disabled = zoomLevel >= 3;
+            document.getElementById('zoom-out-btn').disabled = zoomLevel <= 0.5;
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+            resetZoom();
+        }
+
+        init();
+    </script>
+</body>
+</html>
