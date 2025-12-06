@@ -665,7 +665,7 @@
         }
 
         .about-btn:hover {
-            background: rgba(26, 26, 26, 0.2);
+            background:wheat;
             transform: scale(1.05);
         }
 
@@ -688,6 +688,11 @@
             pointer-events: auto;
         }
 
+        .about-popup.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
         .about-popup a {
             color: #1a1a1a;
             text-decoration: none;
@@ -706,6 +711,39 @@
 
             .index-item {
                 border-right: none;
+            }
+
+            .header-gif {
+                min-height: 30px;
+            }
+
+            .about-popup {
+                position: absolute;
+                bottom: 50px;
+                right: 0;
+                background: #fcfbf8;
+                border: 1px solid #1a1a1a;
+                padding: 1rem 1.5rem;
+                white-space: nowrap;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease;
+                font-size: 0.85rem;
+            }
+
+            .about-btn:hover .about-popup {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .about-popup.show {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .about-btn {
+                background: rgb(255, 255, 255);
+                border: 1px solid rgba(183, 183, 183, 0.3);
             }
 
             .works {
@@ -778,14 +816,21 @@
             .index-title {
                 font-size: 1rem;
             }
+            .modal-nav {
+                display: block;
+            }
+
+            .modal-nav-right {
+                margin: 5px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- About button - always visible -->
-    <div class="about-btn">
+    <div class="about-btn" id="about-btn">
         𓆏
-        <div class="about-popup">
+        <div class="about-popup" id="about-popup">
             author · <a href="https://falahsheikh.com/">visit</a>
         </div>
     </div>
@@ -981,6 +1026,23 @@
         let zoomLevel = 1;
         let isDragging = false;
         let startX, startY, scrollLeft, scrollTop;
+
+        // Setup about button click listener
+        document.getElementById('about-btn').addEventListener('click', function(event) {
+            event.stopPropagation();
+            const popup = document.getElementById('about-popup');
+            popup.classList.toggle('show');
+        });
+
+        // Close popup when clicking outside
+        document.addEventListener('click', function(event) {
+            const popup = document.getElementById('about-popup');
+            const aboutBtn = document.getElementById('about-btn');
+            
+            if (popup && !aboutBtn.contains(event.target)) {
+                popup.classList.remove('show');
+            }
+        });
 
         async function init() {
             // Load images for image-type albums (only if not pre-defined)
