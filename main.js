@@ -81,7 +81,8 @@ function populateDefaultView() {
     awardsList.innerHTML = '';
     data.awards.forEach(award => {
         const li = document.createElement('li');
-        li.textContent = `${award.name} (${award.amount})`;
+        // li.textContent = `${award.name} (${award.amount})`;
+        li.textContent = award.name; 
         awardsList.appendChild(li);
     });
     
