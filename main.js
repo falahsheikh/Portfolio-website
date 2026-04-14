@@ -1,5 +1,5 @@
 // Code by Falah Sheikh
-/* Last update: 04/14/2026 */
+// Last update: 04/14/2026
 
 // Google Analytics Configuration
 // For local development: Create a config.js file with: window.GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
@@ -96,7 +96,7 @@ function populateDefaultView() {
     
 // Publications
     const INITIAL_VISIBLE = 2;
-    let isScrollable = false;
+    window._pubsState = { isScrollable: false, userToggled: false };
 
     const pubsContainer = document.getElementById('publicationsContainer');
     pubsContainer.classList.add('pubs-list');
@@ -135,7 +135,26 @@ function populateDefaultView() {
     if (toggleBtn) {
         toggleBtn.textContent = `Show more (${totalPubs - INITIAL_VISIBLE})`;
         toggleBtn.addEventListener('click', function() {
-            isScrollable = !isScrollable;
+            const searchInput = document.getElementById('searchInput');
+            const isSearchActive = searchInput && searchInput.value.trim() !== '';
+
+            if (isSearchActive) {
+                // Search-triggered scroll mode: clear search and collapse
+                searchInput.value = '';
+                pubsContainer.classList.remove('scrollable');
+                document.getElementById('scrollIndicator').classList.remove('show');
+                document.querySelectorAll('#publicationsContainer .featured-card-link').forEach((card, i) => {
+                    card.style.display = i < INITIAL_VISIBLE ? 'block' : 'none';
+                });
+                window._pubsState.isScrollable = false;
+                toggleBtn.textContent = `Show more (${totalPubs - INITIAL_VISIBLE})`;
+                updateSearchNote();
+                return;
+            }
+
+            window._pubsState.userToggled = true;
+            window._pubsState.isScrollable = !window._pubsState.isScrollable;
+            const isScrollable = window._pubsState.isScrollable;
             pubsContainer.classList.toggle('scrollable', isScrollable);
             document.getElementById('scrollIndicator').classList.toggle('show', isScrollable);
             document.querySelectorAll('#publicationsContainer .featured-card-link').forEach((card, i) => {
@@ -592,26 +611,66 @@ function setupEventListeners() {
     
     searchInput.addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase().trim();
+        const pubsContainer = document.getElementById('publicationsContainer');
+        const toggleBtn = document.getElementById('togglePubsBtn');
+        const scrollIndicator = document.getElementById('scrollIndicator');
+        const INITIAL_VISIBLE = 2;
+        const totalPubs = publications.length;
         let hasVisibleAsterisk = false;
-        
-        publications.forEach(publication => {
-            const cardContent = publication.querySelector('.card-content');
-            const title = cardContent.querySelector('h3').textContent.toLowerCase();
-            const publicationInfo = cardContent.querySelector('.card-publication').textContent.toLowerCase();
-            const authors = cardContent.querySelector('.card-preview').textContent.toLowerCase();
-            
-            const allText = title + ' ' + publicationInfo + ' ' + authors;
-            
-            if (searchTerm === '' || allText.includes(searchTerm)) {
-                publication.style.display = 'block';
-                if (authors.includes('*')) {
-                    hasVisibleAsterisk = true;
-                }
-            } else {
-                publication.style.display = 'none';
+
+        if (searchTerm !== '') {
+            // Enter scroll view for searching
+            if (!pubsContainer.classList.contains('scrollable')) {
+                pubsContainer.classList.add('scrollable');
+                scrollIndicator.classList.add('show');
             }
-        });
-        
+            if (toggleBtn) {
+                toggleBtn.textContent = `Show less (${totalPubs})`;
+            }
+            publications.forEach(publication => {
+                const cardContent = publication.querySelector('.card-content');
+                const title = cardContent.querySelector('h3').textContent.toLowerCase();
+                const publicationInfo = cardContent.querySelector('.card-publication').textContent.toLowerCase();
+                const authors = cardContent.querySelector('.card-preview').textContent.toLowerCase();
+                const allText = title + ' ' + publicationInfo + ' ' + authors;
+
+                if (allText.includes(searchTerm)) {
+                    publication.style.display = 'block';
+                    if (authors.includes('*')) hasVisibleAsterisk = true;
+                } else {
+                    publication.style.display = 'none';
+                }
+            });
+        } else {
+            // Search cleared: revert to collapsed if user never clicked Show more
+            if (!window._pubsState.userToggled || !window._pubsState.isScrollable) {
+                pubsContainer.classList.remove('scrollable');
+                scrollIndicator.classList.remove('show');
+                publications.forEach((publication, i) => {
+                    publication.style.display = i < INITIAL_VISIBLE ? 'block' : 'none';
+                });
+                if (toggleBtn) {
+                    toggleBtn.textContent = `Show more (${totalPubs - INITIAL_VISIBLE})`;
+                }
+                window._pubsState.isScrollable = false;
+            } else {
+                // User had manually expanded, restore all visible
+                publications.forEach(publication => {
+                    publication.style.display = 'block';
+                });
+                if (toggleBtn) {
+                    toggleBtn.textContent = `Show less (${totalPubs})`;
+                }
+            }
+            // Update asterisk note for visible cards
+            publications.forEach(publication => {
+                if (publication.style.display !== 'none') {
+                    const authors = publication.querySelector('.card-preview').textContent.toLowerCase();
+                    if (authors.includes('*')) hasVisibleAsterisk = true;
+                }
+            });
+        }
+
         if (hasVisibleAsterisk) {
             searchNote.classList.add('show');
         } else {
