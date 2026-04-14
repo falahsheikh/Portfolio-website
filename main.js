@@ -1,5 +1,5 @@
 // Code by Falah Sheikh
-// Last update: 11/9/2025
+/* Last update: 04/14/2026 */
 
 // Google Analytics Configuration
 // For local development: Create a config.js file with: window.GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
@@ -94,20 +94,26 @@ function populateDefaultView() {
         <li>Research Focus: ${data.profile.focusAreas}</li>
     `;
     
-    // Publications
+// Publications
+    const INITIAL_VISIBLE = 2;
+    let isScrollable = false;
+
     const pubsContainer = document.getElementById('publicationsContainer');
+    pubsContainer.classList.add('pubs-list');
     pubsContainer.innerHTML = '';
-    data.publications.forEach(pub => {
+
+    data.publications.forEach((pub, index) => {
         const card = document.createElement('div');
         card.className = 'featured-card-link';
-        
+        if (index >= INITIAL_VISIBLE) card.classList.add('hidden-card');
+
         const authorsText = pub.authors.map(author => {
             if (author === 'Falah Sheikh' || author === 'Falah Sheikh*') {
                 return `<strong>${author}</strong>`;
             }
             return author;
         }).join(', ');
-        
+
         card.innerHTML = `
             <div class="featured-card">
                 <div class="card-content">
@@ -123,6 +129,27 @@ function populateDefaultView() {
         `;
         pubsContainer.appendChild(card);
     });
+
+    const totalPubs = data.publications.length;
+    const toggleBtn = document.getElementById('togglePubsBtn');
+    if (toggleBtn) {
+        toggleBtn.textContent = `Show more (${totalPubs - INITIAL_VISIBLE})`;
+        toggleBtn.addEventListener('click', function() {
+            isScrollable = !isScrollable;
+            pubsContainer.classList.toggle('scrollable', isScrollable);
+            document.getElementById('scrollIndicator').classList.toggle('show', isScrollable);
+            document.querySelectorAll('#publicationsContainer .featured-card-link').forEach((card, i) => {
+                if (isScrollable) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = i < INITIAL_VISIBLE ? 'block' : 'none';
+                }
+            });
+            toggleBtn.textContent = isScrollable
+                ? `Show less (${totalPubs})`
+                : `Show more (${totalPubs - INITIAL_VISIBLE})`;
+        });
+    }
     
     // Current Research
     const currentResearch = document.getElementById('default-current-research');

@@ -1,5 +1,5 @@
 /* Code by Falah Sheikh */
-/* Last update: 11/9/2025 */
+/* Last update: 04/14/2026 */
 
 * {
     margin: 0;
@@ -687,7 +687,7 @@ body.default-dark .card-link:hover {
     color: var(--cream-light);
 }body.default .search-box,
 body.default-dark .search-box {
-    margin-bottom: 1rem;
+    margin-bottom: 0;
     position: relative;
 }body.default .search-box input,
 body.default-dark .search-box input {
@@ -708,6 +708,8 @@ body.default-dark .search-note {
     font-size: 0.7rem;
     color: var(--text-muted);
     margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
 }body.default .search-note.show,
 body.default-dark .search-note.show {
     display: block;
@@ -2355,4 +2357,68 @@ body.retro-ms93 .theme-dropdown .theme-option:hover {
     background: var(--cream-dark);
     font-weight: bold;
     color: var(--accent-burgundy) !important;
+}.pubs-wrapper { position: relative; }
+
+.pubs-list.scrollable {
+    max-height: 420px;
+    overflow-y: scroll !important;
+    border: 1px solid var(--border-color);
+    background: var(--cream-bg);
+    padding: 1.5rem 1rem 1.5rem 1.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-brown) var(--cream-dark);
+}.pubs-list.scrollable::-webkit-scrollbar {
+    width: 12px;
+    background: var(--cream-dark);
+    border-left: 1px solid var(--border-color);
+}.pubs-list.scrollable::-webkit-scrollbar-track {
+    background: var(--cream-light);
+    border: 1px solid var(--border-color);
+    margin: 4px 0;
+}.pubs-list.scrollable::-webkit-scrollbar-thumb {
+    background: var(--accent-brown);
+    border: 1px solid var(--border-color);
+    min-height: 40px;
+}.pubs-list.scrollable::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-burgundy);
+}.pubs-list.scrollable .featured-card-link {
+    margin-bottom: 1.5rem;
+}.pubs-list.scrollable .featured-card-link:last-child {
+    margin-bottom: 0;
+}.scroll-indicator {
+    display: none;
+    margin-top: 10px;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: center;
+}.scroll-indicator.show { display: block; }
+
+#publicationsContainer:not(.scrollable) .featured-card-link.hidden-card { display: none; }
+
+.search-row {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 10px;
+    margin-bottom: 0.4rem;
+    align-items: stretch;
+}.search-box {
+    flex: 3;
+}.toggle-btn {
+    flex: 1;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    padding: 0 0.8rem;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+}.toggle-btn:hover {
+    border-color: var(--accent-brown);
+    color: var(--accent-brown);
 }

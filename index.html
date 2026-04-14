@@ -1,6 +1,6 @@
 <!-- Code (Retro) by Falah Sheikh -->
 <!-- Default theme inspired by Saffron Huang's https://saffronhuang.com/ -->
-<!-- Last update: 11/9/2025 -->
+<!-- Last update: 04/14/2026 -->
  
 <!DOCTYPE html>
 <html lang="en">
@@ -187,12 +187,16 @@
             <div class="featured-column">
                 <h2>Research Publications</h2>
                 
-                <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="Search publications...">
-                    <div class="search-note" id="searchNote">*: Equal contribution</div>
+                <div class="search-row">
+                    <button class="toggle-btn" id="togglePubsBtn">Show more</button>
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search publications...">
+                    </div>
                 </div>
+                <div class="search-note" id="searchNote">*: Equal contribution</div>
                 
                 <div class="featured-writing" id="publicationsContainer"></div>
+                <div class="scroll-indicator" id="scrollIndicator">— scroll to see all publications —</div>
                 
                 <div class="current-research-section">
                     <h2>Current Research</h2>
