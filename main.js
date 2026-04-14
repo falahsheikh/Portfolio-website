@@ -165,7 +165,8 @@ function populateDefaultView() {
                 }
             });
             toggleBtn.textContent = isScrollable
-                ? `Show less (${totalPubs})`
+                // Before: [? Show less (${totalPubs})`]
+                ? `Show less` 
                 : `Show more (${totalPubs - INITIAL_VISIBLE})`;
         });
     }
