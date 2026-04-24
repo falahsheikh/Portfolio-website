@@ -2047,7 +2047,7 @@ body.retro-ms93 .no-results {
     }    body.default .links-column,
     body.default-dark .links-column {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 1rem;
     }
 }body.default-dark .theme-dropdown .theme-option {
