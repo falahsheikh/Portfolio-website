@@ -101,6 +101,14 @@ function populateDefaultView() {
     pubsContainer.classList.add('pubs-list');
     pubsContainer.innerHTML = '';
 
+    // Featured divider above the featured cards (only if any are featured)
+    if (data.publications.some(p => p.featured)) {
+        const featuredDivider = document.createElement('div');
+        featuredDivider.className = 'featured-divider';
+        featuredDivider.innerHTML = '<span>FEATURED</span>';
+        pubsContainer.appendChild(featuredDivider);
+    }
+
     // Render in original (chronological) order; hide non-featured by default
     data.publications.forEach((pub) => {
         const card = document.createElement('div');
@@ -114,12 +122,9 @@ function populateDefaultView() {
             return author;
         }).join(', ');
 
-        const featuredBadge = pub.featured ? '<span class="featured-badge">Featured</span>' : '';
-
         card.innerHTML = `
             <div class="featured-card">
                 <div class="card-content">
-                    ${featuredBadge}
                     <h3>${pub.title}</h3>
                     <p class="card-publication">${pub.venue}, ${pub.year}</p>
                     <p class="card-preview">${authorsText}</p>
