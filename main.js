@@ -95,17 +95,17 @@ function populateDefaultView() {
     `;
     
 // Publications
-    const INITIAL_VISIBLE = 2;
     window._pubsState = { isScrollable: false, userToggled: false };
 
     const pubsContainer = document.getElementById('publicationsContainer');
     pubsContainer.classList.add('pubs-list');
     pubsContainer.innerHTML = '';
 
-    data.publications.forEach((pub, index) => {
+    // Render in original (chronological) order; hide non-featured by default
+    data.publications.forEach((pub) => {
         const card = document.createElement('div');
         card.className = 'featured-card-link';
-        if (index >= INITIAL_VISIBLE) card.classList.add('hidden-card');
+        if (!pub.featured) card.classList.add('hidden-card');
 
         const authorsText = pub.authors.map(author => {
             if (author === 'Falah Sheikh' || author === 'Falah Sheikh*') {
@@ -114,9 +114,12 @@ function populateDefaultView() {
             return author;
         }).join(', ');
 
+        const featuredBadge = pub.featured ? '<span class="featured-badge">Featured</span>' : '';
+
         card.innerHTML = `
             <div class="featured-card">
                 <div class="card-content">
+                    ${featuredBadge}
                     <h3>${pub.title}</h3>
                     <p class="card-publication">${pub.venue}, ${pub.year}</p>
                     <p class="card-preview">${authorsText}</p>
@@ -131,9 +134,10 @@ function populateDefaultView() {
     });
 
     const totalPubs = data.publications.length;
+    const hiddenCount = data.publications.filter(p => !p.featured).length;
     const toggleBtn = document.getElementById('togglePubsBtn');
     if (toggleBtn) {
-        toggleBtn.textContent = `Show more (${totalPubs - INITIAL_VISIBLE})`;
+        toggleBtn.textContent = `Show more (${hiddenCount})`;
         toggleBtn.addEventListener('click', function() {
             const searchInput = document.getElementById('searchInput');
             const isSearchActive = searchInput && searchInput.value.trim() !== '';
@@ -143,11 +147,11 @@ function populateDefaultView() {
                 searchInput.value = '';
                 pubsContainer.classList.remove('scrollable');
                 document.getElementById('scrollIndicator').classList.remove('show');
-                document.querySelectorAll('#publicationsContainer .featured-card-link').forEach((card, i) => {
-                    card.style.display = i < INITIAL_VISIBLE ? 'block' : 'none';
+                document.querySelectorAll('#publicationsContainer .featured-card-link').forEach((card) => {
+                    card.style.display = card.classList.contains('hidden-card') ? 'none' : 'block';
                 });
                 window._pubsState.isScrollable = false;
-                toggleBtn.textContent = `Show more (${totalPubs - INITIAL_VISIBLE})`;
+                toggleBtn.textContent = `Show more (${hiddenCount})`;
                 updateSearchNote();
                 return;
             }
@@ -157,17 +161,16 @@ function populateDefaultView() {
             const isScrollable = window._pubsState.isScrollable;
             pubsContainer.classList.toggle('scrollable', isScrollable);
             document.getElementById('scrollIndicator').classList.toggle('show', isScrollable);
-            document.querySelectorAll('#publicationsContainer .featured-card-link').forEach((card, i) => {
+            document.querySelectorAll('#publicationsContainer .featured-card-link').forEach((card) => {
                 if (isScrollable) {
                     card.style.display = 'block';
                 } else {
-                    card.style.display = i < INITIAL_VISIBLE ? 'block' : 'none';
+                    card.style.display = card.classList.contains('hidden-card') ? 'none' : 'block';
                 }
             });
             toggleBtn.textContent = isScrollable
-                // Before: [? Show less (${totalPubs})`]
                 ? `Show less` 
-                : `Show more (${totalPubs - INITIAL_VISIBLE})`;
+                : `Show more (${hiddenCount})`;
         });
     }
     
@@ -615,7 +618,7 @@ function setupEventListeners() {
         const pubsContainer = document.getElementById('publicationsContainer');
         const toggleBtn = document.getElementById('togglePubsBtn');
         const scrollIndicator = document.getElementById('scrollIndicator');
-        const INITIAL_VISIBLE = 2;
+        const hiddenCount = document.querySelectorAll('#publicationsContainer .featured-card-link.hidden-card').length;
         const totalPubs = publications.length;
         let hasVisibleAsterisk = false;
 
@@ -647,11 +650,11 @@ function setupEventListeners() {
             if (!window._pubsState.userToggled || !window._pubsState.isScrollable) {
                 pubsContainer.classList.remove('scrollable');
                 scrollIndicator.classList.remove('show');
-                publications.forEach((publication, i) => {
-                    publication.style.display = i < INITIAL_VISIBLE ? 'block' : 'none';
+                publications.forEach((publication) => {
+                    publication.style.display = publication.classList.contains('hidden-card') ? 'none' : 'block';
                 });
                 if (toggleBtn) {
-                    toggleBtn.textContent = `Show more (${totalPubs - INITIAL_VISIBLE})`;
+                    toggleBtn.textContent = `Show more (${hiddenCount})`;
                 }
                 window._pubsState.isScrollable = false;
             } else {
