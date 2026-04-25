@@ -48,7 +48,7 @@ function populateDefaultView() {
     bioShort.innerHTML = '';
     data.profile.bioShort.forEach(para => {
         const p = document.createElement('p');
-        p.textContent = para;
+        p.innerHTML = para;
         bioShort.appendChild(p);
     });
     
@@ -57,7 +57,7 @@ function populateDefaultView() {
     bioLong.innerHTML = '';
     data.profile.bioLong.forEach(para => {
         const p = document.createElement('p');
-        p.textContent = para;
+        p.innerHTML = para;
         bioLong.appendChild(p);
     });
     
@@ -82,7 +82,7 @@ function populateDefaultView() {
     data.awards.forEach(award => {
         const li = document.createElement('li');
         // li.textContent = `${award.name} (${award.amount})`;
-        li.textContent = award.name; 
+        li.innerHTML = award.name;
         awardsList.appendChild(li);
     });
     
@@ -176,7 +176,7 @@ function populateDefaultView() {
     currentResearch.innerHTML = '';
     data.currentResearch.forEach(research => {
         const li = document.createElement('li');
-        li.textContent = research;
+        li.innerHTML = research;
         currentResearch.appendChild(li);
     });
     
