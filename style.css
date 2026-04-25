@@ -2443,7 +2443,7 @@ body.default-dark .featured-divider::before,
 body.default-dark .featured-divider::after {
     content: "";
     flex: 1;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px dotted var(--border-color);
 }.pubs-list.scrollable .featured-divider {
     display: none;
 }
