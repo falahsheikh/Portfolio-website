@@ -448,7 +448,8 @@ function populateRetroView() {
                         </a>
                     </div>
                 `;
-            } else if (link.url.startsWith('http')) {
+            } else {
+                // This catches ALL other links including "Art"
                 return `
                     <div class="connection-entry">
                         <a href="${link.url}" class="connections-link" target="_blank">
@@ -457,8 +458,8 @@ function populateRetroView() {
                     </div>
                 `;
             }
-            return '';
         }).join('');
+
     connectionsTable.innerHTML = `
         <tr><th>Connect</th></tr>
         <tr><td>${connectionEntries}</td></tr>
