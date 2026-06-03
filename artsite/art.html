@@ -911,9 +911,14 @@
     </div>
 
     <script>
-        // ========================
-        // EDIT ONLY THIS SECTION 
-        // ========================
+        // ============================================================
+        // EDIT ONLY THIS SECTION
+        // ------------------------------------------------------------
+        // Add art:    drop image files into the album's folder
+        //             (artsite/imagefolders/<folder>) and push.
+        // Add album:  copy an album block below, then set its
+        //             title / folder / gif.
+        // ============================================================
         
         const CONFIG = {
             // Global GIF settings - set once, applies everywhere
@@ -923,115 +928,29 @@
             // Site info
             siteName: "falah's",
             siteTagline: "art collections & writing",
-            introBannerImage: "./banner/banner.webp",
-            
-            // Albums - Simple configuration
+                        introBannerImage: "./banner/banner.webp",
+
+            // Repo the site is published from. On the live site GitHub Pages can't list
+            // a folder in the browser, so we ask the GitHub API what's inside each
+            // folder. Update these if you ever rename or move the repo.
+            repo: {
+                owner: 'falahsheikh',
+                name: 'Portfolio-website',
+                branch: 'main',
+                basePath: 'artsite'    // image folders live under this path in the repo
+            },
+
+            // Albums.
+            //   Image album:   { title, type: 'images', folder, gif }
+            //                  -> every image in `folder` shows up automatically; just
+            //                     drop files into the folder and push. No paths to list.
+            //   Writing album: { title, type: 'writing', gif, pieces: [ ... ] }
             albums: [
                 {
-                    title: 'hope',
+                    title: 'rays',
                     type: 'writing',
                     gif: './gifs/sun5.gif',
                     pieces: [
-                        {
-                            title: 'despair',
-                            meta: 'poetry · 2026',
-                            excerpt: 'despair does not arrive loudly / it settles / the way dust settles … a version of me / that grows when I do nothing … despair is not only a feeling / it is a body / made from the space I surrender … one day / a folded shirt / a washed plate / a cleared corner of the bed.',
-                            fullText: `
-                                <p>
-                                    despair does not arrive loudly
-                                    it settles
-                                    the way dust settles
-                                    <br>
-                                    <br>
-
-                                    clothes collapse into a soft mound
-                                    in a corner of the bed
-                                    unfolded
-                                    some unclean
-                                    all wrinkled
-                                    <br>
-                                    <br>
-
-                                    the sink is where dishes
-                                    stack tall
-                                    and spill wide
-                                    all unclean
-                                    <br>
-                                    <br>
-
-                                    this internal air
-                                    turns into a miasma others notice
-                                    they avoid my eyes
-                                    and I, theirs in embarrassment
-                                    <br>
-                                    <br>
-
-                                    I ask myself:
-                                    why is it so hard
-                                    to clear this air
-                                    to fold the cloth
-                                    to return these things
-                                    to where they belong?
-                                    <br>
-                                    <br>
-
-                                    to not just put away
-                                    but to purify, to fix
-                                    <br>
-                                    <br>
-
-                                    the answer waits
-                                    in the spaces I have given away
-                                    <br>
-                                    <br>
-
-                                    the one who has taken them
-                                    the one who leaves these quiet wrecks
-                                    is not a stranger
-                                    but a monster
-                                    <br>
-                                    <br>
-
-                                    it is a shape of myself
-                                    I have been carrying
-                                    <br>
-                                    <br>
-
-                                    a version of me
-                                    that grows when I do nothing
-                                    that feeds on minutes
-                                    and claims the floor
-                                    the bed
-                                    the sink
-                                    the room
-                                    <br>
-                                    <br>
-
-                                    despair is not only a feeling
-                                    <br>
-                                    <br>
-
-                                    it is a body
-                                    made from the space I surrender
-                                    <br>
-                                    <br>
-
-                                    one day
-                                    I will take a step
-                                    <br>
-                                    <br>
-
-                                    a folded shirt
-                                    a washed plate
-                                    a cleared corner of the bed
-                                    <br>
-                                    <br>
-
-                                    until I take it back
-                                    from who I will choose not to be
-                                </p>
-                            `
-                        },
                         {
                             title: 'time',
                             meta: 'poetry · 2025',
@@ -1056,61 +975,34 @@
                     ]
                 },
                 {
-                    title: 'Hazy',
+                    title: 'hazy',
                     type: 'images',                    // 'images' or 'writing'
-                    folder: './imagefolders/intrestingimg',         // For image albums only
+                    folder: './imagefolders/hazy',         // For image albums only
                     gif: './gifs/glitch2.gif',         // Optional: override default GIF
-                    // IMPORTANT: List your images explicitly here
-                    images: [
-                        { path: './imagefolders/glitch/rift.png', filename: 'wave_color.png' },
-                        { path: './imagefolders/glitch/crest.png', filename: 'wave_color.png' },
-                        { path: './imagefolders/glitch/swirl.png', filename: 'wave_color.png' }
-                    ]
                 },
                 {
                     title: 'pairs',
                     type: 'images',                   
-                    folder: './imagefolders/photos',      
+                    folder: './imagefolders/pairs',      
                     gif: './gifs/roll.gif',     
-                    // IMPORTANT: List your images explicitly here
-                    images: [
-                        { path: './imagefolders/photos/friends.png', filename: 'friends.png' },
-                    ]
                 },
                 {
                     title: 'vesmuhunu',
                     type: 'images',               
-                    folder: './imagefolders/masks',
+                    folder: './imagefolders/vesmuhunu',
                     gif: './gifs/mask.gif',
-                    images: [
-                        { path: './imagefolders/digital/tark.png', filename: 'tark.png' },
-                    ]
                 },
-                // {
-                //     title: 'fantasy',
-                //     type: 'images',               
-                //     folder: './imagefolders/fantasy',
-                //     gif: './gifs/celestial2.webp',
-                //     images: [
-                //     ]
-                // },
                 {
-                    title: 'moon',
+                    title: 'selene',
                     type: 'images',               
-                    folder: './imagefolders/moon',
+                    folder: './imagefolders/selene',
                     gif: './gifs/butterfly2.gif',
-                    images: [
-                        { path: './imagefolders/moon/blue-white.jpg', filename: 'blue-white.jpg'},
-                    ]
                 },
                 {
-                    title: 'buildings',
+                    title: 'BOLD.',
                     type: 'images',               
-                    folder: './imagefolders/monoliths',
+                    folder: './imagefolders/bold',
                     gif: './gifs/monolith.gif',
-                    images: [
-                        { path: './imagefolders/monoliths/modern_monolith.png', filename: 'modern_monolith.png'},
-                    ]
                 },
                 // {
                 //     title: 'not my work',
@@ -1168,7 +1060,7 @@
                 //     ]
                 // },
                 {
-                    title: 'heart',
+                    title: 'bleeding',
                     type: 'writing',
                     gif: './gifs/heart.gif',
                     pieces: [
@@ -1265,40 +1157,103 @@
             setupEventListeners();
         }
 
+        // Image file types we treat as artwork.
+        const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
+        const isImageFile = (name) => IMAGE_EXTENSIONS.some(ext => name.toLowerCase().endsWith(ext));
+
+        // Are we previewing locally rather than on the published site?
+        function isLocalPreview() {
+            return location.protocol === 'file:' ||
+                   ['localhost', '127.0.0.1', ''].includes(location.hostname);
+        }
+
+        // Shape a list of file names into the { path, filename } objects the gallery uses.
+        function toImageEntries(folder, names) {
+            return [...new Set(names)]
+                .filter(isImageFile)
+                .sort((a, b) => a.localeCompare(b))
+                .map(name => ({ path: `${folder}/${name}`, filename: name }));
+        }
+
+        // Auto-discover every image in an album's folder, so adding art is just a matter of
+        // dropping files into the folder and pushing -- no need to list paths by hand.
         async function loadImagesFromFolder(album) {
-            // Try to fetch images from the folder
-            try {
-                const response = await fetch(album.folder);
-                if (response.ok) {
-                    const text = await response.text();
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(text, 'text/html');
-                    const links = Array.from(doc.querySelectorAll('a'));
-                    
-                    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
-                    const imageFiles = links
-                        .map(link => link.getAttribute('href'))
-                        .filter(href => href && imageExtensions.some(ext => href.toLowerCase().endsWith(ext)));
-                    
-                    if (imageFiles.length > 0) {
-                        return imageFiles.map(filename => ({
-                            path: `${album.folder}/${filename}`,
-                            filename: filename
-                        }));
-                    }
-                }
-            } catch (error) {
-                console.log('Could not auto-load images, using demo images');
+            // Local preview: dev servers like `python -m http.server` expose a directory
+            // listing we can read straight from the folder.
+            if (isLocalPreview()) {
+                const local = await listFolderViaDirectoryIndex(album.folder);
+                if (local.length) return toImageEntries(album.folder, local);
             }
-            
-            // Fallback to demo images - none
-            const demoUrls = [
-            ];
-            
-            return demoUrls.map((url, i) => ({
-                path: url,
-                filename: `demo-${i}.jpg`
-            }));
+
+            // Live site: GitHub Pages has no directory listing, so ask the GitHub API what
+            // files live in the folder (cached, so we stay well under the rate limit).
+            try {
+                const names = await listFolderViaGitHub(album.folder);
+                if (names.length) return toImageEntries(album.folder, names);
+            } catch (error) {
+                console.warn(`Could not auto-load images for "${album.title}":`, error.message);
+            }
+
+            return [];
+        }
+
+        // Parse a server-generated directory listing (used during local preview only).
+        async function listFolderViaDirectoryIndex(folder) {
+            try {
+                const response = await fetch(folder);
+                if (!response.ok) return [];
+                const doc = new DOMParser().parseFromString(await response.text(), 'text/html');
+                return Array.from(doc.querySelectorAll('a'))
+                    .map(a => a.getAttribute('href'))
+                    .filter(Boolean)
+                    .map(href => decodeURIComponent(href.split('?')[0].split('/').pop()))
+                    .filter(isImageFile);
+            } catch (error) {
+                return [];
+            }
+        }
+
+        // List a folder through the GitHub Contents API. Results are cached in localStorage
+        // so repeat visits and quick refreshes don't exhaust the 60 requests/hour limit.
+        // Tip: append ?refresh to the URL to force a re-read after pushing new images.
+        async function listFolderViaGitHub(folder) {
+            const { owner, name, branch, basePath } = CONFIG.repo;
+            const base = basePath ? basePath.replace(/\/+$/, '') + '/' : '';
+            const repoPath = base + folder.replace(/^\.\//, '');
+            const cacheKey = `artsite:imgs:${owner}/${name}@${branch}:${repoPath}`;
+            const ttlMs = 10 * 60 * 1000; // 10 minutes
+            const bypassCache = /[?&](refresh|nocache)(=|&|$)/.test(location.search);
+
+            if (!bypassCache) {
+                const cached = readImageCache(cacheKey);
+                if (cached && Date.now() - cached.ts < ttlMs) return cached.files;
+            }
+
+            const url = `https://api.github.com/repos/${owner}/${name}/contents/${repoPath}?ref=${branch}`;
+            try {
+                const res = await fetch(url, { headers: { Accept: 'application/vnd.github+json' } });
+                if (!res.ok) throw new Error(`GitHub API responded ${res.status}`);
+                const files = (await res.json())
+                    .filter(item => item.type === 'file')
+                    .map(item => item.name);
+                writeImageCache(cacheKey, { ts: Date.now(), files });
+                return files;
+            } catch (error) {
+                // Rate limited or offline: fall back to the last cached list, even if stale.
+                const cached = readImageCache(cacheKey);
+                if (cached) return cached.files;
+                throw error;
+            }
+        }
+
+        function readImageCache(key) {
+            try { return JSON.parse(localStorage.getItem(key)); }
+            catch (error) { return null; }
+        }
+
+        function writeImageCache(key, value) {
+            try { localStorage.setItem(key, JSON.stringify(value)); }
+            catch (error) { /* storage unavailable -- caching is optional */ }
         }
 
         function enterSite() {
