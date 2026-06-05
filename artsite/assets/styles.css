@@ -268,15 +268,31 @@ body::before {
     background-size: cover;
     background-position: center;
     z-index: 0;
+}
+
+/* A thin animated gif frame revealed on hover (see the hover media query).
+   The mask paints the gif only in the outer sliver: the inner content-box
+   is subtracted, leaving just the border ring. */
+.index-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    padding: 8px;
+    background-image: url('../gifs/back3.gif');
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
     transition: opacity 0.3s ease;
-}
-
-.index-item:hover {
-    padding-left: 3.5rem;
-}
-
-.index-item:hover::before {
-    opacity: 0.3;
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
 }
 
 .index-info {
@@ -394,6 +410,7 @@ body::before {
 
 .work {
     cursor: pointer;
+    overflow: hidden;
 }
 
 .work img {
@@ -401,12 +418,8 @@ body::before {
     aspect-ratio: 3/4;
     object-fit: cover;
     margin-bottom: 0.7rem;
-    transition: opacity 0.2s;
+    transition: transform 0.5s ease, filter 0.4s ease;
     filter: contrast(1.05) brightness(0.98);
-}
-
-.work:hover img {
-    opacity: 0.6;
 }
 
 .work-title {
@@ -469,8 +482,23 @@ body::before {
     color: #666;
 }
 
-.writing:hover .writing-excerpt {
-    color: #1a1a1a;
+/* Hover effects only on real pointers — touch devices skip them so nothing
+   gets stuck in a washed-out hover state after a tap (are.na-style). */
+@media (hover: hover) {
+    /* A sliver of the gif frames the hovered tile. */
+    .index-item:hover::after {
+        opacity: 1;
+    }
+
+    /* A subtle zoom on the artwork rather than dimming it. */
+    .work:hover img {
+        transform: scale(1.04);
+        filter: contrast(1.05) brightness(1.02);
+    }
+
+    .writing:hover .writing-excerpt {
+        color: #1a1a1a;
+    }
 }
 
 .modal {
@@ -492,24 +520,30 @@ body::before {
 
 .modal-nav {
     position: fixed;
-    top: 0;               
+    top: 0;
     left: 0;
     right: 0;
-    background: #fcfbf8;  
+    background: #fcfbf8;
     z-index: 10;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem 3rem 0 3rem; 
+    gap: 1.5rem;
+    padding: 1.25rem 2.5rem;
 }
 
 .modal-close {
-    font-size: 1.5rem;
+    font-size: 0.95rem;
     cursor: pointer;
     background: none;
     border: none;
     color: #1a1a1a;
     font-family: 'Courier New', monospace;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: #999;
 }
 
 .modal-nav-right {
@@ -591,16 +625,12 @@ body::before {
 }
 
 .modal-content img.zoomed {
-    cursor: zoom-out;
-    transform: scale(var(--zoom-level, 1));
-    transform-origin: var(--zoom-x, 50%) var(--zoom-y, 50%);
-}
-
-.modal-content img.zoomed-max {
     cursor: grab;
+    transform: translate(var(--pan-x, 0), var(--pan-y, 0)) scale(var(--zoom-level, 1));
+    transform-origin: center center;
 }
 
-.modal-content img.zoomed-max:active {
+.modal-content img.zoomed:active {
     cursor: grabbing;
 }
 
@@ -710,6 +740,20 @@ body::before {
     color: blueviolet;
 }
 
+/* ============================================
+   TOUCH DEVICES — are.na-style image viewing
+   ============================================ */
+@media (pointer: coarse) {
+    /* Pinch-zoom is native here; the +/- controls only get in the way. */
+    .modal-zoom-controls {
+        display: none !important;
+    }
+
+    .modal-content img {
+        cursor: default;
+    }
+}
+
 @media (max-width: 1024px) {
     .index {
         grid-template-columns: 1fr;
@@ -769,13 +813,34 @@ body::before {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .modal {
+        padding: 1.5rem;
+    }
+
     .modal-nav {
-        margin-top: 10px;
-        padding: 0 1.5rem;
+        padding: 1rem 1.5rem;
     }
 
     .modal-content {
         margin-top: 4rem;
+    }
+
+    /* Center a single artwork in the viewport, like opening an image on are.na.
+       Writings keep their normal top-aligned, scrollable layout. */
+    .modal.image-mode .modal-content {
+        margin-top: 0;
+        min-height: calc(100vh - 3rem);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .modal.image-mode .modal-content img {
+        max-height: 82vh;
+        width: auto;
+        max-width: 100%;
+        margin: 0 auto;
+        object-fit: contain;
     }
 
     .intro-name {
@@ -814,10 +879,12 @@ body::before {
         font-size: 1rem;
     }
     .modal-nav {
-        display: block;
+        flex-wrap: wrap;
+        gap: 0.75rem 1rem;
+        padding: 1rem 1.25rem;
     }
 
     .modal-nav-right {
-        margin: 5px;
+        gap: 1.25rem;
     }
 }

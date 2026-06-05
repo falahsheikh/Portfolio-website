@@ -33,8 +33,17 @@ let currentAlbumId = '';
 let currentIndex = 0;
 let currentItems = [];
 let zoomLevel = 1;
-let isDragging = false;
-let startX, startY, scrollLeft, scrollTop;
+// Pan offset (screen px) of a zoomed image, plus the drag bookkeeping that
+// lets you grab and move to any part of the image once zoomed in.
+let panX = 0, panY = 0;
+let isDragging = false, didDrag = false;
+let dragStartX = 0, dragStartY = 0, panStartX = 0, panStartY = 0;
+
+// Coarse-pointer (touch) devices get a simpler, are.na-style image view:
+// native pinch-zoom instead of the click-to-zoom that traps touch users
+// (its panning was wired to mouse events only), plus swipe to navigate and
+// swipe-down / tap-the-backdrop to close.
+const isTouch = window.matchMedia('(pointer: coarse)').matches;
 
 // Setup about button click listener - TOGGLE functionality
 document.getElementById('about-btn').addEventListener('click', function(event) {
@@ -47,11 +56,48 @@ document.getElementById('about-btn').addEventListener('click', function(event) {
 document.addEventListener('click', function(event) {
     const popup = document.getElementById('about-popup');
     const aboutBtn = document.getElementById('about-btn');
-    
+
     if (popup && !aboutBtn.contains(event.target)) {
         popup.classList.remove('show');
     }
 });
+
+// Drag-to-pan a zoomed image. Attached once (not per image) so listeners don't
+// stack; they do nothing unless a zoomed image is actively being dragged.
+document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    e.preventDefault();
+    const dx = e.clientX - dragStartX;
+    const dy = e.clientY - dragStartY;
+    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) didDrag = true;
+    panX = panStartX + dx;
+    panY = panStartY + dy;
+    applyImageTransform();
+});
+
+document.addEventListener('mouseup', function() {
+    if (!isDragging) return;
+    isDragging = false;
+    const img = document.querySelector('#modal-content img');
+    if (img) {
+        img.style.transition = '';
+        if (zoomLevel > 1) img.style.cursor = 'grab';
+    }
+});
+
+// Write the current zoom + pan to the image, keeping the pan within the image
+// so you can never drag it off into empty space.
+function applyImageTransform() {
+    const img = document.querySelector('#modal-content img');
+    if (!img) return;
+    const maxX = Math.max(0, (img.offsetWidth * zoomLevel - img.offsetWidth) / 2);
+    const maxY = Math.max(0, (img.offsetHeight * zoomLevel - img.offsetHeight) / 2);
+    panX = Math.min(maxX, Math.max(-maxX, panX));
+    panY = Math.min(maxY, Math.max(-maxY, panY));
+    img.style.setProperty('--zoom-level', zoomLevel);
+    img.style.setProperty('--pan-x', panX + 'px');
+    img.style.setProperty('--pan-y', panY + 'px');
+}
 
 async function init() {
     // Auto-load images for any album that points at a folder
@@ -289,6 +335,60 @@ function setupEventListeners() {
             if (e.key === 'ArrowRight') navigate(1);
         }
     });
+
+    // Ctrl/Cmd + wheel zooms the open image. Attached once to the persistent
+    // modal-content container rather than re-bound on every image.
+    document.getElementById('modal-content').addEventListener('wheel', function(e) {
+        if (isTouch) return;
+        if (!document.querySelector('#modal-content img')) return;
+        if (e.ctrlKey || e.metaKey) {
+            e.preventDefault();
+            if (e.deltaY < 0) zoomIn(); else zoomOut();
+        }
+    }, { passive: false });
+
+    setupModalDismiss();
+    if (isTouch) setupSwipeNavigation();
+}
+
+// Tap (or click) the empty backdrop around the artwork to close — like are.na.
+// Taps on the image, text or nav buttons fall through untouched.
+function setupModalDismiss() {
+    const modal = document.getElementById('modal');
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal || e.target.id === 'modal-content') closeModal();
+    });
+}
+
+// Touch gestures inside the open modal: swipe left/right to move between works,
+// swipe down on an image to dismiss. Multi-touch and pinch-zoomed states are
+// ignored so native zoom/pan is never hijacked.
+function setupSwipeNavigation() {
+    const modal = document.getElementById('modal');
+    let startX = 0, startY = 0, tracking = false;
+    const isPinchZoomed = () => window.visualViewport && window.visualViewport.scale > 1.01;
+
+    modal.addEventListener('touchstart', function(e) {
+        if (e.touches.length > 1 || isPinchZoomed()) { tracking = false; return; }
+        tracking = true;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    }, { passive: true });
+
+    modal.addEventListener('touchend', function(e) {
+        if (!tracking || isPinchZoomed()) return;
+        tracking = false;
+        const dx = e.changedTouches[0].clientX - startX;
+        const dy = e.changedTouches[0].clientY - startY;
+        const absX = Math.abs(dx), absY = Math.abs(dy);
+
+        if (absX > 45 && absX > absY * 1.5) {
+            navigate(dx < 0 ? 1 : -1);
+        } else if (modal.classList.contains('image-mode') &&
+                   modal.scrollTop <= 0 && dy > 90 && absY > absX * 1.5) {
+            closeModal();
+        }
+    }, { passive: true });
 }
 
 function showView(viewName) {
@@ -310,11 +410,11 @@ function showWork(index) {
     document.getElementById('modal-content').innerHTML = `
         <img src="${img}" alt="">
     `;
-    
+
     updateNavButtons();
     resetZoom();
     setupImageZoom();
-    document.getElementById('modal').classList.add('active');
+    document.getElementById('modal').classList.add('active', 'image-mode');
     document.getElementById('about-btn').classList.add('hidden');
 }
 
@@ -335,6 +435,7 @@ function showWriting(index) {
     updateNavButtons();
     document.getElementById('zoom-controls').style.display = 'none';
     document.getElementById('modal').classList.add('active');
+    document.getElementById('modal').classList.remove('image-mode');
     document.getElementById('about-btn').classList.add('hidden');
 }
 
@@ -362,88 +463,72 @@ function setupImageZoom() {
         document.getElementById('zoom-controls').style.display = 'none';
         return;
     }
-    
+
+    // Touch devices: skip the custom click-to-zoom and mouse-drag panning —
+    // it traps a tap at 2x with no way to pan. Pinch-zoom works natively, and
+    // the +/- controls stay hidden.
+    if (isTouch) {
+        document.getElementById('zoom-controls').style.display = 'none';
+        return;
+    }
+
     document.getElementById('zoom-controls').style.display = 'flex';
-    
+
+    // Click to zoom toward the clicked point; click again to reset. After
+    // zooming you can grab and drag anywhere across the image.
     img.onclick = function(e) {
+        if (didDrag) { didDrag = false; return; }   // a drag just ended — don't toggle
         if (zoomLevel === 1) {
             const rect = img.getBoundingClientRect();
-            const x = ((e.clientX - rect.left) / rect.width) * 100;
-            const y = ((e.clientY - rect.top) / rect.height) * 100;
-            
             zoomLevel = 2;
-            img.style.setProperty('--zoom-x', x + '%');
-            img.style.setProperty('--zoom-y', y + '%');
-            img.style.setProperty('--zoom-level', zoomLevel);
-            img.classList.add('zoomed');
-            updateZoomUI();
+            // Pan so the clicked point lands in the middle of the view.
+            panX = (rect.width / 2 - (e.clientX - rect.left)) * zoomLevel;
+            panY = (rect.height / 2 - (e.clientY - rect.top)) * zoomLevel;
+            applyZoom();
         } else {
             resetZoom();
         }
     };
-    
-    modalContent.addEventListener('wheel', function(e) {
-        if (e.ctrlKey || e.metaKey) {
-            e.preventDefault();
-            if (e.deltaY < 0) {
-                zoomIn();
-            } else {
-                zoomOut();
-            }
-        }
-    }, { passive: false });
-    
-    img.addEventListener('mousedown', function(e) {
-        if (zoomLevel > 1) {
-            isDragging = true;
-            startX = e.pageX - modalContent.offsetLeft;
-            startY = e.pageY - modalContent.offsetTop;
-            scrollLeft = modalContent.scrollLeft;
-            scrollTop = modalContent.scrollTop;
-            img.style.cursor = 'grabbing';
-        }
-    });
-    
-    document.addEventListener('mousemove', function(e) {
-        if (!isDragging) return;
+
+    img.onmousedown = function(e) {
+        if (zoomLevel <= 1) return;
         e.preventDefault();
-        const x = e.pageX - modalContent.offsetLeft;
-        const y = e.pageY - modalContent.offsetTop;
-        const walkX = (x - startX) * 2;
-        const walkY = (y - startY) * 2;
-        modalContent.scrollLeft = scrollLeft - walkX;
-        modalContent.scrollTop = scrollTop - walkY;
-    });
-    
-    document.addEventListener('mouseup', function() {
-        isDragging = false;
-        const img = document.querySelector('#modal-content img');
-        if (img && zoomLevel > 1) {
-            img.style.cursor = 'grab';
-        }
-    });
+        isDragging = true;
+        didDrag = false;
+        dragStartX = e.clientX;
+        dragStartY = e.clientY;
+        panStartX = panX;
+        panStartY = panY;
+        img.style.transition = 'none';   // follow the cursor 1:1 while dragging
+        img.style.cursor = 'grabbing';
+    };
 }
 
 function zoomIn() {
     if (zoomLevel < 3) {
-        zoomLevel += 0.25;
+        zoomLevel = Math.min(3, zoomLevel + 0.25);
         applyZoom();
     }
 }
 
 function zoomOut() {
     if (zoomLevel > 0.5) {
-        zoomLevel -= 0.25;
+        zoomLevel = Math.max(0.5, zoomLevel - 0.25);
         applyZoom();
     }
 }
 
 function resetZoom() {
     zoomLevel = 1;
+    panX = 0;
+    panY = 0;
     const img = document.querySelector('#modal-content img');
     if (img) {
-        img.style.setProperty('--zoom-level', 1);
         img.classList.remove('zoomed', 'zoomed-max');
+        img.style.removeProperty('--pan-x');
+        img.style.removeProperty('--pan-y');
+        img.style.setProperty('--zoom-level', 1);
+        img.style.transition = '';
         img.style.cursor = 'zoom-in';
     }
     updateZoomUI();
@@ -452,27 +537,10 @@ function resetZoom() {
 function applyZoom() {
     const img = document.querySelector('#modal-content img');
     if (img) {
-        img.style.setProperty('--zoom-level', zoomLevel);
-        
-        if (zoomLevel !== 1) {
-            img.classList.add('zoomed');
-        } else {
-            img.classList.remove('zoomed');
-        }
-        
-        if (zoomLevel >= 3) {
-            img.classList.add('zoomed-max');
-        } else {
-            img.classList.remove('zoomed-max');
-        }
-        
-        if (zoomLevel > 1) {
-            img.style.cursor = 'grab';
-        } else if (zoomLevel < 1) {
-            img.style.cursor = 'zoom-in';
-        } else {
-            img.style.cursor = 'zoom-in';
-        }
+        img.classList.toggle('zoomed', zoomLevel !== 1);
+        img.classList.toggle('zoomed-max', zoomLevel >= 3);
+        img.style.cursor = zoomLevel > 1 ? 'grab' : 'zoom-in';
+        applyImageTransform();
     }
     updateZoomUI();
 }
@@ -484,7 +552,7 @@ function updateZoomUI() {
 }
 
 function closeModal() {
-    document.getElementById('modal').classList.remove('active');
+    document.getElementById('modal').classList.remove('active', 'image-mode');
     document.getElementById('about-btn').classList.remove('hidden');
     resetZoom();
 }
